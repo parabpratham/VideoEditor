@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Video_anno_data>
+	<annotation id="0" type="com.vid.comp.Jcomp.Title">
+		<starttime>0</starttime>
+		<endtime> 0</endtime>
+		<comp_type>JCOMPONENT</comp_type>
+		<parameters set="1">
+			<StartX> 0.0</StartX>
+			<StartY>0.0</StartY>
+			<Popupinterval>100</Popupinterval>
+			<Underline>false</Underline>
+			<Width>114.0</Width>
+			<Height>35.0</Height>
+			<BgColor>rgba(77,26,77,0.48148148148148145)</BgColor>
+			<DisplayString> This is Title </DisplayString>
+			<DisplayStringColor> rgb(102,77,179) </DisplayStringColor>
+			<Font>Malgun Gothic</Font>
+			<Font_size>12</Font_size>
+			<Bold>false</Bold>
+			<Italic>false</Italic>
+			<Strikethrough>false</Strikethrough>
+			<Underline>false</Underline>
+		</parameters>
+	</annotation>
+	<annotation id="1" type="com.vid.comp.Jcomp.SpotLight">
+		<starttime>7125</starttime>
+		<endtime> 13165</endtime>
+		<comp_type>JCOMPONENT</comp_type>
+		<parameters set="1">
+			<StartX> 43.05</StartX>
+			<StartY>91.05</StartY>
+			<Width>106.0</Width>
+			<Height>84.0</Height>
+			<BgColor>rgba(102,51,102,44.44444444444444)</BgColor>
+			<Bgfilepath>C:\Users\hp\Desktop\_MG_1801.JPG</Bgfilepath>
+			<Showonhover>false</Showonhover>
+			<Fillbg>true</Fillbg>
+			<DisplayString> This is spotlight </DisplayString>
+			<DisplayStringColor> This is spotlight </DisplayStringColor>
+			<Font>Arial</Font>
+			<Font_size>8</Font_size>
+			<Bold>false</Bold>
+			<Italic>false</Italic>
+			<Strikethrough>false</Strikethrough>
+			<Underline>false</Underline>
+		</parameters>
+	</annotation>
+	<annotation id="2" type="com.vid.comp.Jcomp.Note">
+		<starttime>17445</starttime>
+		<endtime> 17445</endtime>
+		<comp_type>JCOMPONENT</comp_type>
+		<parameters set="1">
+			<StartX> 326.05</StartX>
+			<StartY>191.05</StartY>
+			<Width>114.0</Width>
+			<Height>55.0</Height>
+			<BgColor>rgba(255,153,153,41.66666666666667)</BgColor>
+			<DisplayString> I Am Note </DisplayString>
+			<DisplayStringColor> I Am Note </DisplayStringColor>
+			<Font>Arial</Font>
+			<Font_size>16</Font_size>
+			<Bold>false</Bold>
+			<Italic>false</Italic>
+			<Strikethrough>false</Strikethrough>
+			<Underline>false</Underline>
+		</parameters>
+	</annotation>
+	<annotation id="3" type="com.vid.comp.Jcomp.Markers">
+		<starttime>21090</starttime>
+		<endtime> 21090</endtime>
+		<comp_type>JCOMPONENT</comp_type>
+		<parameters set="1">
+			<StartX> 486.05</StartX>
+			<StartY>17.05</StartY>
+			<Width>100.0</Width>
+			<Height>50.0</Height>
+			<Bgfilepath>C:\Users\hp\Desktop\11071130_10206416860242231_2368862400322491499_n.jpg
+			</Bgfilepath>
+			<DisplayString> Owwwwwwwwwww </DisplayString>
+			<DisplayStringColor> Owwwwwwwwwww </DisplayStringColor>
+			<Font>Arial Unicode MS</Font>
+			<Font_size>32</Font_size>
+			<Bold>false</Bold>
+			<Italic>false</Italic>
+			<Strikethrough>false</Strikethrough>
+			<Detachable>true</Detachable>
+			<Initially_detached>true</Initially_detached>
+			<Auto_position>false</Auto_position>
+			<Arrow_indent>19.22222222222222</Arrow_indent>
+			<Arrow_size>45.33333333333333</Arrow_size>
+			<Corner_radius>19.333333333333336</Corner_radius>
+			<Arrow_loaction>RIGHT_CENTER</Arrow_loaction>
+		</parameters>
+	</annotation>
+</Video_anno_data>

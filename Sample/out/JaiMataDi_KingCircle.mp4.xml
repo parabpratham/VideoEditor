@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><Video_anno_data><annotation id="0" 
+ type="com.vid.comp.Jcomp.AnnotationMarkers">
+<starttime>1995</starttime>
+<endtime> 17183</endtime><comp_type>JCOMPONENT</comp_type><parameters set="1"> 
+<StartX> 103.05</StartX> 
+<StartY>65.05</StartY> 
+<Width>100.0</Width> 
+<Height>50.0</Height> 
+<Bgfilepath>C:\Users\hp\Desktop\_MG_1801.JPG</Bgfilepath> 
+<DisplayString> This is Marker </DisplayString> 
+<DisplayStringColor> rgb(255,255,255) </DisplayStringColor> 
+<Font>Arial</Font> 
+<Font_size>8</Font_size> 
+<Bold>false</Bold>
+<Italic>false</Italic>
+<Strikethrough>false</Strikethrough>
+<Detachable>true</Detachable>
+<Initially_detached>true</Initially_detached>
+<Auto_position>false</Auto_position>
+<Arrow_indent>12.0</Arrow_indent>
+<Arrow_size>12.0</Arrow_size>
+<Corner_radius>6.0</Corner_radius>
+<Arrow_loaction>LEFT_CENTER</Arrow_loaction>
+</parameters> 
+</annotation> 
+</Video_anno_data>

@@ -1,0 +1,38 @@
+<annotation id="0" 
+ type="com.vid.comp.Jcomp.Note">
+<starttime>1140</starttime>
+<endtime> 1140</endtime><comp_type>JCOMPONENT</comp_type><parameters set="1"> 
+<StartX> 149.05</StartX> 
+<StartY>253.05</StartY> 
+<Width>100.0</Width> 
+<Height>50.0</Height> 
+<BgColor>rgb(153,77,102)</BgColor> 
+<DisplayString> rgb(153,179,255) </DisplayString> 
+<DisplayStringColor> rgb(153,179,255) </DisplayStringColor> 
+<Font>Bauhaus 93</Font> 
+<FontSize>8</FontSize> 
+<bold>false</bold>
+<italic>false</italic>
+<strikethrough>false</strikethrough>
+<underline>false</underline>
+</parameters> 
+</annotation> 
+<annotation id="1" 
+ type="com.vid.comp.Jcomp.Note">
+<starttime>1140</starttime>
+<endtime> 1140</endtime><comp_type>JCOMPONENT</comp_type><parameters set="1"> 
+<StartX> 463.05</StartX> 
+<StartY>80.05</StartY> 
+<Width>100.0</Width> 
+<Height>50.0</Height> 
+<BgColor>rgb(255,255,255)</BgColor> 
+<DisplayString> rgb(153,128,230) </DisplayString> 
+<DisplayStringColor> rgb(153,128,230) </DisplayStringColor> 
+<Font>Algerian</Font> 
+<FontSize>14</FontSize> 
+<bold>false</bold>
+<italic>false</italic>
+<strikethrough>false</strikethrough>
+<underline>false</underline>
+</parameters> 
+</annotation> 

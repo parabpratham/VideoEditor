@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vid.controller.AddAnnoController">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TabPane maxHeight="350.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" tabClosingPolicy="UNAVAILABLE" visible="true">
+               <tabs>
+                  <Tab fx:id="tab_ann_pro" text="Annotation Property">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <VBox prefHeight="350.0" prefWidth="400.0" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="318.0" prefWidth="400.0">
+                                       <children>
+                                          <GridPane fx:id="gridAnno" hgap="5.0" layoutX="65.0" prefHeight="288.0" prefWidth="349.0" vgap="5.0" AnchorPane.bottomAnchor="-108.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label prefHeight="17.0" prefWidth="127.0" text="Annotation Type" />
+                                                <AnchorPane prefHeight="27.0" prefWidth="193.0" GridPane.columnIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" right="10.0" />
+                                                   </GridPane.margin>
+                                                   <children>
+                                                      <TextField fx:id="anntype" promptText="Annotation_type" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                                         <padding>
+                                                            <Insets left="10.0" right="10.0" />
+                                                         </padding>
+                                                      </TextField>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <ColorPicker fx:id="bgcolor" prefHeight="33.0" prefWidth="162.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                                   </padding>
+                                                </AnchorPane>
+                                                <Label text="Background Colour" GridPane.rowIndex="1" />
+                                                <Label text="Background Image" GridPane.rowIndex="2" />
+                                                <Label text="Width" GridPane.rowIndex="3" />
+                                                <Label text="Height" GridPane.rowIndex="4" />
+                                                <AnchorPane prefHeight="33.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <children>
+                                                      <TextField fx:id="width" prefHeight="25.0" prefWidth="121.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <children>
+                                                      <TextField fx:id="height" prefHeight="25.0" prefWidth="90.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <children>
+                                                      <Slider fx:id="opacity" layoutX="3.0" layoutY="1.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="8.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <Label text="Opacity" GridPane.rowIndex="5" />
+                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <children>
+                                                      <HBox layoutX="45.0" layoutY="5.0" prefHeight="35.0" prefWidth="167.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <children>
+                                                            <AnchorPane prefHeight="32.0" prefWidth="131.0">
+                                                               <children>
+                                                                  <TextField fx:id="bgfilepath" prefHeight="25.0" prefWidth="143.0" promptText="Enter path" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane>
+                                                               <children>
+                                                                  <Button fx:id="filechooser" ellipsisString="" mnemonicParsing="false" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                                                                     <graphic>
+                                                                        <ImageView id="glyphicons-145-folder-open.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                           <image>
+                                                                              <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-145-folder-open.png" />
+                                                                           </image>
+                                                                        </ImageView>
+                                                                     </graphic>
+                                                                     <tooltip>
+                                                                        <Tooltip text="Bold" />
+                                                                     </tooltip>
+                                                                  </Button>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                       <padding>
+                                          <Insets left="30.0" right="30.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                 </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tab_text" text="Text Property">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="346.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane>
+                                       <children>
+                                          <Label layoutX="154.0" text="Text Property" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="105.0" prefWidth="379.0">
+                                       <children>
+                                          <TextArea fx:id="textbox" prefHeight="200.0" prefWidth="379.0" promptText="Add text here" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="39.0" prefWidth="400.0">
+                                       <children>
+                                          <HBox prefHeight="35.0" prefWidth="400.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="39.0" prefWidth="215.0">
+                                                   <children>
+                                                      <ComboBox fx:id="fonts" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+                                                   </padding>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="39.0" prefWidth="84.0">
+                                                   <children>
+                                                      <ChoiceBox fx:id="font_size" layoutX="18.0" prefWidth="105.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="39.0" prefWidth="92.0">
+                                                   <children>
+                                                      <ColorPicker fx:id="font_colour" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <HBox prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane prefHeight="45.0" prefWidth="214.0">
+                                                   <children>
+                                                      <ToolBar prefHeight="40.0" prefWidth="168.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                                                         <items>
+                                                            <ToggleButton fx:id="font_bold" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Bold">
+                                                               <graphic>
+                                                                  <ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-103-bold.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Bold" />
+                                                               </tooltip>
+                                                            </ToggleButton>
+                                                            <ToggleButton fx:id="font_U" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Underline">
+                                                               <graphic>
+                                                                  <ImageView id="underline.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-104-text-underline.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Underline" />
+                                                               </tooltip>
+                                                            </ToggleButton>
+                                                            <ToggleButton fx:id="font_I" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Indent">
+                                                               <graphic>
+                                                                  <ImageView id="italic.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-102-italic.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Indent" />
+                                                               </tooltip>
+                                                            </ToggleButton>
+                                                            <ToggleButton fx:id="font_strikeout" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Strikeout">
+                                                               <graphic>
+                                                                  <ImageView id="text-strike.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-105-text-strike.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Strikeout" />
+                                                               </tooltip>
+                                                            </ToggleButton>
+                                                            <ToggleButton fx:id="wraptext" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Wrap">
+                                                               <graphic>
+                                                                  <ImageView id="text-wrap.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-107-text-width.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Wrap" />
+                                                               </tooltip>
+                                                            </ToggleButton>
+                                                         </items>
+                                                      </ToolBar>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="45.0" prefWidth="174.0">
+                                                   <children>
+                                                      <ToolBar layoutX="10.0" prefHeight="45.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                                         <items>
+                                                            <Button fx:id="jestifyalign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Justify">
+                                                               <graphic>
+                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-114-justify.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Justify" />
+                                                               </tooltip>
+                                                            </Button>
+                                                            <Button fx:id="leftalign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Left Align">
+                                                               <graphic>
+                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-111-align-left.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Left Align" />
+                                                               </tooltip>
+                                                            </Button>
+                                                            <Button fx:id="centeralign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Center align">
+                                                               <graphic>
+                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-112-align-center.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Center align" />
+                                                               </tooltip>
+                                                            </Button>
+                                                            <Button fx:id="rightalign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Right Align">
+                                                               <graphic>
+                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+                                                                     <image>
+                                                                        <Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-113-align-right.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                               <tooltip>
+                                                                  <Tooltip text="Right Align" />
+                                                               </tooltip>
+                                                            </Button>
+                                                         </items>
+                                                      </ToolBar>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <ButtonBar prefHeight="40.0" prefWidth="396.0">
+              <buttons>
+                  <Button fx:id="save" mnemonicParsing="false" text="Save" />
+                <Button fx:id="cancel" mnemonicParsing="false" text="Cancel" />
+              </buttons>
+               <padding>
+                  <Insets left="100.0" right="100.0" />
+               </padding>
+            </ButtonBar>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
