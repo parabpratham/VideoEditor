@@ -6,9 +6,12 @@ import org.controlsfx.control.InfoOverlay;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.PopOver.ArrowLocation;
 
+import com.vid.overlay.comp.master.SHAPE_TYPE;
+
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Shape;
 
 public abstract class AbstractComp {
 
@@ -17,7 +20,9 @@ public abstract class AbstractComp {
 	private boolean bgImageOption = false;
 	private boolean infopanel = false;
 
-	private String FXMLPath = "fxml/Ann_add_popup.fxml";
+	private String FXMLPath = "fxml/Ann_add_popup.fxml"; // For adding the adder
+															// controller FXML
+															// layout
 	private String controllerClass;
 
 	private String annName;
@@ -68,8 +73,51 @@ public abstract class AbstractComp {
 	private double arrow_indent;
 	private double corner_radius;
 
+	// For Static Shape
+	private String shapeName;
+	private SHAPE_TYPE shapeType;
+	private Shape shape;
+	private boolean fillShape;
+
+	public boolean isFillShape() {
+		return fillShape;
+	}
+
+	public void setFillShape(boolean fillShape) {
+		this.fillShape = fillShape;
+	}
+
+	public SHAPE_TYPE getShapeType() {
+		return shapeType;
+	}
+
+	public void setShapeType(SHAPE_TYPE shapeType) {
+		this.shapeType = shapeType;
+	}
+
+	public Shape getShape() {
+		return shape;
+	}
+
+	public String getShapeName() {
+		return shapeName;
+	}
+
+	public void setShapeName(String shapeName) {
+		this.shapeName = shapeName;
+	}
+
 	private MarkerPopUp markerPopup;
 
+	/**
+	 * @param startX
+	 * @param startY
+	 * @param width
+	 * @param height
+	 * 
+	 *            For getting the dimension of the rectangle video
+	 * 
+	 */
 	public void setBounds(double startX, double startY, double width, double height) {
 		setStartX(startX);
 		setStartY(startY);
@@ -84,6 +132,22 @@ public abstract class AbstractComp {
 		saveInfo();
 	}
 
+	/**
+	 * @param displayString
+	 * @param displayStringColor
+	 * @param font
+	 * @param font_size
+	 * @param bold
+	 * @param italic
+	 * @param strikethrough
+	 * @param underline
+	 * 
+	 * 
+	 *            For setting the text related properties
+	 * 
+	 *            Called from AnnotationPropertyWindow class for setting the
+	 *            values
+	 */
 	public void setTextOptions(String displayString, String displayStringColor, String font, String font_size,
 			boolean bold, boolean italic, boolean strikethrough, boolean underline) {
 		setDisplayString(displayString);
@@ -97,12 +161,36 @@ public abstract class AbstractComp {
 
 	}
 
+	/**
+	 * 
+	 * @param bgColor
+	 * @param alpha
+	 * @param bgfilepath
+	 * 
+	 *            For setting the background related properties
+	 * 
+	 *            Called from AnnotationPropertyWindow class for setting the
+	 *            values
+	 */
+
 	public void setBackgroundOptions(String bgColor, Double alpha, String bgfilepath) {
 		setBgColor(bgColor);
 		setAlpha(alpha);
 		setBgfilepath(bgfilepath);
 		saveInfo();
 	}
+
+	/**
+	 * 
+	 * @param bgColor
+	 * @param alpha
+	 * @param bgfilepath
+	 * 
+	 *            For setting the Maker Annotation related properties
+	 * 
+	 *            Called from AnnotationPropertyWindow class for setting the
+	 *            values
+	 */
 
 	public void setMarkerProperties(boolean detachable, boolean initially_detached, boolean auto_position,
 			ArrowLocation arrow_loaction, double arrow_size, double arrow_indent, double corner_radius) {
@@ -123,6 +211,12 @@ public abstract class AbstractComp {
 		System.out.println(toXml());
 	}
 
+	/**
+	 * 
+	 * @return the string for storing the component
+	 * 
+	 *         To be overridden by each child class
+	 */
 	public String toXml() {
 		return null;
 	}
@@ -458,7 +552,12 @@ public abstract class AbstractComp {
 		this.corner_radius = corner_radius;
 	}
 
-	// Added class for the Marker control
+	/**
+	 * @author hp
+	 * 
+	 *         Added class for the Marker control
+	 *
+	 */
 	public class MarkerPopUp {
 
 		ImageView view;
@@ -507,6 +606,19 @@ public abstract class AbstractComp {
 
 	public MarkerPopUp getMarkerPopup() {
 		return markerPopup;
+	}
+
+	public void setShape(Shape shape) {
+		this.shape = shape;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj == null)
+			return false;
+		AbstractComp comp = (AbstractComp) obj;
+		return id == comp.getId();
 	}
 
 }
