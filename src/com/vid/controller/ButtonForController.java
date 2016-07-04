@@ -17,6 +17,7 @@ import com.vid.comp.Jcomp.Title;
 
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
@@ -122,8 +123,9 @@ public class ButtonForController {
 				double deltaX = event.getSceneX() - mouseLocation.value.getX();
 				double deltaY = event.getSceneY() - mouseLocation.value.getY();
 				double newMaxX = rect.getX() + rect.getWidth() + deltaX;
-				System.out.println(newMaxX + " " + rect.getX() + " " + rect.getParent().getBoundsInLocal().getWidth()
-						+ " " + handleRadius + " " + rect.getParent());
+				// System.out.println(newMaxX + " " + rect.getX() + " " +
+				// rect.getParent().getBoundsInLocal().getWidth()
+				// + " " + handleRadius + " " + rect.getParent());
 				if (newMaxX >= rect.getX()
 						&& newMaxX <= rect.getParent().getBoundsInLocal().getWidth() - handleRadius) {
 					rect.setWidth(rect.getWidth() + deltaX);
@@ -441,6 +443,24 @@ public class ButtonForController {
 				}
 
 			}
+		});
+
+	}
+
+	public static void initializeAddTagButton(VideoEditorController videoEditorController, Button addtag_butt) {
+
+		addtag_butt.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				DirectMediaPlayer mediaPlayer = videoEditorController.getMediaPlayerComponent().getMediaPlayer();
+				if (mediaPlayer.isPlaying())
+					mediaPlayer.pause();
+
+				FXMLLoader loader = new FXMLLoader(
+						getClass().getClassLoader().getResource(AddTagController.getFXMLPath()));
+				AnnotationPropertyWindow.setupAddTagWindow(videoEditorController, loader,mediaPlayer);
+			}
+
 		});
 
 	}

@@ -8,7 +8,9 @@ import com.vid.commons.Helper;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
@@ -16,6 +18,9 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -54,6 +59,7 @@ public class TextAreaTut extends Application {
 				text.setUnderline(butt.isSelected());
 				text.setStrikethrough(butt.isSelected());
 				text.setTextAlignment(TextAlignment.CENTER);
+				text.setFill(Color.BROWN);
 				area.setWrapText(true);
 				System.out.println(text.getText());
 			}
@@ -70,11 +76,19 @@ public class TextAreaTut extends Application {
 		iew.setStyle("-fx-background-color: " + toRgbStringa(Color.RED, 0.5) + ";");
 		HBox hbox2 = new HBox();
 
-		WritableImage writableImage = Helper.createBorderImage(iew,Color.RED);
+		WritableImage writableImage = Helper.createBorderImage(iew, Color.RED);
 
 		iew.setImage(writableImage);
 
-		hbox2.getChildren().addAll(iew, butt2);
+		Label contentText = new Label("getDisplayString()");
+		contentText.setWrapText(true);
+		contentText.setDisable(true);
+		contentText.setMinWidth(120);
+		contentText.setMinHeight(20);
+//		BackgroundFill fill = new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY);
+//		contentText.setBackground(new Background(fill));
+		contentText.setStyle("-fx-background-color: " + toRgbStringa(Color.RED, 0.5) + ";");
+		hbox2.getChildren().addAll(iew, contentText, butt2);
 
 		vBox.getChildren().addAll(box, hbox2);
 
@@ -91,12 +105,12 @@ public class TextAreaTut extends Application {
 
 		for (int i = 0; i < iew.getFitHeight(); i++) {
 			writer.setColor(0, i, Color.RED);
-			writer.setColor(i, (int)iew.getFitWidth()-1, Color.RED);
+			writer.setColor(i, (int) iew.getFitWidth() - 1, Color.RED);
 		}
 
 		for (int j = 0; j < iew.getFitWidth(); j++) {
 			writer.setColor(j, 0, Color.RED);
-			writer.setColor((int)iew.getFitHeight()-1, j, Color.RED);
+			writer.setColor((int) iew.getFitHeight() - 1, j, Color.RED);
 		}
 		return writableImage;
 	}

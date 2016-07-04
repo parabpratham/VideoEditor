@@ -56,4 +56,8 @@ public class SpeechBubble extends AbstractComp {
 		label.getGraphic();
 	}
 
+	public enum link_type {
+		SEEK, OTHERVIDEO, WEBLINK;
+	}
+
 }

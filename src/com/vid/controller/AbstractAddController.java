@@ -76,6 +76,15 @@ public class AbstractAddController implements Initializable {
 	private CheckBox initially_detached;
 	private CheckBox detachable;
 	private ComboBox<ArrowLocation> arrow_loaction;
+	private CheckBox fillShape;
+
+	public CheckBox getFillShape() {
+		return fillShape;
+	}
+
+	public void setFillShape(CheckBox fillShape) {
+		this.fillShape = fillShape;
+	}
 
 	private static List<String> families = javafx.scene.text.Font.getFamilies();
 
@@ -96,10 +105,14 @@ public class AbstractAddController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		getTextbox().setFont(font);
+		if (getTextbox() != null)
+			getTextbox().setFont(font);
+
+		if (getFont_colour() != null)
+			getFont_colour().setValue(Color.BLACK);
+
 		if (getBgcolor() != null)
 			getBgcolor().setValue(Color.WHITE);
-		getFont_colour().setValue(Color.BLACK);
 
 		if (getFonts() != null) {
 			getFonts().setValue("Arial");
@@ -107,7 +120,7 @@ public class AbstractAddController implements Initializable {
 			getFonts().setItems(FXCollections.observableList(getFamilies()));
 			getFont_size().setItems(FXCollections.observableList(getFontsizelist()));
 		}
-		
+
 		width.setDisable(true);
 		height.setDisable(true);
 		anntype.setDisable(true);

@@ -1,6 +1,9 @@
 package com.vid.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.controlsfx.control.InfoOverlay;
 import org.controlsfx.control.PopOver;
@@ -13,9 +16,14 @@ import com.vid.commons.Helper;
 import com.vid.comp.Jcomp.AbstractComp;
 import com.vid.comp.Jcomp.AbstractComp.MarkerPopUp;
 import com.vid.comp.Jcomp.AnnotationMarkers;
+import com.vid.comp.Jcomp.FaceMarker;
 import com.vid.comp.Jcomp.Note;
 import com.vid.comp.Jcomp.SpotLight;
 import com.vid.comp.Jcomp.Title;
+import com.vid.comp.Scomp.CircleComp;
+import com.vid.overlay.comp.master.SHAPE_TYPE;
+import com.vid.tagging.KeyWord;
+import com.vid.tagging.VideoTag;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -26,6 +34,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,6 +48,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -47,6 +57,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import uk.co.caprica.vlcj.player.direct.DirectMediaPlayer;
 
 public class AnnotationPropertyWindow {
 
@@ -71,6 +82,12 @@ public class AnnotationPropertyWindow {
 				setupTextPropertiesInfoOverlay(vController, abstractComp, controller);
 			} else if (abstractComp instanceof AnnotationMarkers) {
 				setupTextPropertiesForMarker(vController, abstractComp, controller);
+			} else if (abstractComp instanceof FaceMarker) {
+				// set propertirs
+				// setupFaceMarkerProperties(vController, abstractComp,
+				// controller);
+			} else if (abstractComp instanceof CircleComp) {
+				setupShapeProperties(vController, abstractComp, controller);
 			}
 
 			// The annotation property panel
@@ -197,9 +214,13 @@ public class AnnotationPropertyWindow {
 			 * Save button: --> validate, store in the list, hide the
 			 * annotation, add to timeline
 			 */
-			ValidationSupport validationSupport = new ValidationSupport();
-			validationSupport.registerValidator(controller.getTextbox(),
-					Validator.createEmptyValidator("Text is required"));
+
+			// null check due to static comp added
+			if (controller.getTextbox() != null) {
+				ValidationSupport validationSupport = new ValidationSupport();
+				validationSupport.registerValidator(controller.getTextbox(),
+						Validator.createEmptyValidator("Text is required"));
+			}
 
 			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -416,6 +437,16 @@ public class AnnotationPropertyWindow {
 								controller.getArrow_size().getValue(), controller.getArrow_indent().getValue(),
 								controller.getCorner_radius().getValue());
 
+					} else if (controller.getComp() != null && controller.getComp() instanceof CircleComp) {
+						CircleComp circleComp = (CircleComp) controller.getComp();
+						// For circle height and width are same
+						Double radius = Double.parseDouble("" + rect.getHeight()) / 2;
+						circleComp.setCenterX(Double.parseDouble("" + rect.getX()) + radius);
+						circleComp.setCenterX(Double.parseDouble("" + rect.getX()) + radius);
+						circleComp.setRadius(radius);
+						circleComp.setFillShape(controller.getFillShape().isSelected());
+						circleComp.setBgColor(toRgbString(controller.getBgcolor().getValue()) + ","
+								+ controller.getOpacity().getValue() * .01);
 					}
 					vController.getCompList().put(vController.getIndex() + 1, controller.getComp());
 					vController.setIndex(vController.getIndex() + 1);
@@ -430,8 +461,39 @@ public class AnnotationPropertyWindow {
 
 		{
 			e.printStackTrace();
+
 		}
 
+	}
+
+	private static void setupShapeProperties(VideoEditorController vController, AbstractComp abstractComp,
+			AbstractAddController controller) {
+
+		if (abstractComp.getShapeType() == SHAPE_TYPE.CIRCLE) {
+
+			if (controller.getOpacity() != null) {
+				controller.getOpacity().valueProperty().addListener((observable, oldColor, newalpha) -> {
+					Color color = controller.getBgcolor().getValue();
+					abstractComp.getShape().setFill(
+							new Color(color.getRed(), color.getGreen(), color.getBlue(), (double) newalpha * 0.01));
+				});
+			}
+
+			if (controller.getBgcolor() != null) {
+				controller.getBgcolor().valueProperty()
+						.addListener((observable, oldValue, newValue) -> abstractComp.getShape()
+								.setFill(new Color(newValue.getRed(), newValue.getGreen(), newValue.getBlue(),
+										controller.getOpacity().getValue() * 0.01)));
+			}
+
+			Circle circle = (Circle) abstractComp.getShape();
+			circle.radiusProperty().addListener((observable, oldValue, newValue) -> {
+				// System.out.println("controller.getWidth().setText");
+				controller.getWidth().setText("" + newValue);
+				controller.getHeight().setText("" + newValue);
+			});
+
+		}
 	}
 
 	private static void changeOpacity(AbstractAddController controller, AbstractComp abstractComp, Number newalpha) {
@@ -804,4 +866,172 @@ public class AnnotationPropertyWindow {
 		}
 	}
 
+	public static void setupAddTagWindow(VideoEditorController vController, FXMLLoader loader,
+			DirectMediaPlayer mediaPlayer) {
+		Parent root;
+		try {
+			root = (Parent) loader.load();
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Add Tags");
+			AddTagController controller = (AddTagController) loader.getController();
+
+			// start end timer
+			vController.showEndSlider();
+			controller.getStart_time_text().textProperty().bind(vController.getTimeLabel().textProperty());
+			controller.getEnd_time_text().textProperty().bind(vController.getEndtimeLabel().textProperty());
+
+			// Save button
+			controller.getSave_butt().setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					try {
+						// validation description not blank and keyword not
+						// blank
+
+						ValidationSupport validationSupport = new ValidationSupport();
+						validationSupport.registerValidator(controller.getDescription_text(),
+								Validator.createEmptyValidator("Description is required"));
+
+						validationSupport = new ValidationSupport();
+						validationSupport.registerValidator(controller.getKeyword_text(),
+								Validator.createEmptyValidator("Keywords required"));
+
+						if (controller.getDescription_text().getText() == null
+								|| controller.getDescription_text().getText().equalsIgnoreCase("")) {
+							Alert alert = new Alert(AlertType.ERROR);
+							// alert.setTitle(titleTxt);
+							alert.setHeaderText("Information Alert");
+							String s = "Description Required";
+							alert.setContentText(s);
+							alert.show();
+
+							return;
+						}
+
+						if (controller.getKeyword_text().getText() == null
+								|| controller.getKeyword_text().getText().equalsIgnoreCase("")) {
+							Alert alert = new Alert(AlertType.ERROR);
+							// alert.setTitle(titleTxt);
+							alert.setHeaderText("Information Alert");
+							String s = "Keywords Required";
+							alert.setContentText(s);
+							alert.show();
+
+							return;
+						}
+
+						if (vController.getTimeSlider().getValue() == vController.getEndtimeSlider().getValue()) {
+							Alert alert = new Alert(AlertType.ERROR);
+							// alert.setTitle(titleTxt);
+							alert.setHeaderText("Information Alert");
+							String s = "Please select end time";
+							alert.setContentText(s);
+							alert.show();
+
+							return;
+						}
+
+						// Identify all the keywords --> create tag --> refresh
+						// UI and add to key-tag map for search option
+						ObservableList<KeyWord> keywordList = vController.getKeywordObservableList();
+						int index = keywordList.size();
+
+						String keywordString = controller.getKeyword_text().getText();
+						String[] keyWords = keywordString.split(",");
+						List<KeyWord> listWords = new ArrayList<>(vController.getKeywordObservableList());
+						for (String keyword : keyWords) {
+							int id;
+							KeyWord newWord = null;
+							for (KeyWord word : keywordList) {
+								if (word.getWord().equalsIgnoreCase(keyword)) {
+									newWord = word;
+									break;
+								}
+							}
+							if (newWord == null) {
+								id = index++;
+								newWord = new KeyWord(keyword);
+								newWord.setId(id);
+								controller.getTag().addKeyWord(newWord);
+								listWords.add(newWord);
+							}
+
+							List<VideoTag> tagsList = vController.getKeyTagMap().get(keyword);
+							if (tagsList == null) {
+								tagsList = new ArrayList<>();
+							}
+							tagsList.add(controller.getTag());
+							vController.getKeyTagMap().put(keyword, tagsList);
+						}
+						vController.getTagSegmentObservableList().add(controller.getTag());
+						vController.getTagSegmentListView().refresh();
+						vController.getTagSegmentListView().setItems(null);
+						vController.getTagSegmentListView().setItems(vController.getTagSegmentObservableList());
+
+						vController.getKeywordListView().refresh();
+						vController.getKeywordListView().setItems(null);
+						Collections.sort(listWords);
+						vController.getKeywordObservableList().clear();
+						vController.getKeywordObservableList().addAll(listWords);
+						vController.getKeywordListView().setItems(vController.getKeywordObservableList());
+
+						vController.getEndtimeLabel().setVisible(false);
+						vController.getEndtimeSlider().setVisible(false);
+
+						stage.close();
+						mediaPlayer.play();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+
+			// cancel button
+			controller.getCancel_butt().setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+
+					boolean display = ConfirmBox.display("title", "Are u sure:");
+					if (display) {
+						try {
+							vController.getEndtimeLabel().setVisible(false);
+							vController.getEndtimeSlider().setVisible(false);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						stage.close();
+						mediaPlayer.play();
+					}
+				}
+			});
+
+			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+				@Override
+				public void handle(WindowEvent event) {
+					boolean display = ConfirmBox.display("title", "Are u sure:");
+					if (display) {
+						try {
+							vController.getEndtimeLabel().setVisible(false);
+							vController.getEndtimeSlider().setVisible(false);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						mediaPlayer.play();
+						stage.close();
+					}
+				}
+
+			});
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+	}
 }

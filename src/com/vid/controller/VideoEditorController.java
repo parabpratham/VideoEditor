@@ -1,10 +1,10 @@
 package com.vid.controller;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +22,9 @@ import com.vid.comp.Jcomp.BoundedRectangle;
 import com.vid.comp.Jcomp.Note;
 import com.vid.comp.Jcomp.SpotLight;
 import com.vid.comp.Jcomp.Title;
+import com.vid.comp.Scomp.CircleComp;
+import com.vid.tagging.KeyWord;
+import com.vid.tagging.VideoTag;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -54,7 +57,9 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -71,7 +76,9 @@ public class VideoEditorController implements Initializable {
 	public VideoEditorController() {
 		super();
 		compList = new HashMap<>();
-		listItems = FXCollections.observableArrayList();
+		compObservableList = FXCollections.observableArrayList();
+		tagSegmentObservableList = FXCollections.observableArrayList();
+		keywordObservableList = FXCollections.observableArrayList();
 	}
 
 	public static final int baseRectWidth = 110;
@@ -80,11 +87,11 @@ public class VideoEditorController implements Initializable {
 	private Stage primaryStage;
 
 	// Contains list of new and old annotations
-	private Map<Integer, AbstractComp> compList;
-	private int index = 0;
-	ObservableList<AbstractComp> listItems;
 	@FXML
-	private ListView<AbstractComp> listView;
+	private ListView<AbstractComp> compListView;
+	private Map<Integer, AbstractComp> compList;
+	ObservableList<AbstractComp> compObservableList;
+	private int index = 0;
 
 	@FXML
 	private Pane playerHolder;
@@ -159,6 +166,14 @@ public class VideoEditorController implements Initializable {
 	@FXML
 	private TextField timeLabel;
 
+	public TextField getTimeLabel() {
+		return timeLabel;
+	}
+
+	public void setTimeLabel(TextField timeLabel) {
+		this.timeLabel = timeLabel;
+	}
+
 	@FXML
 	private Slider timeSlider;
 
@@ -167,6 +182,23 @@ public class VideoEditorController implements Initializable {
 
 	@FXML
 	private TextField endtimeLabel;
+
+	// Tagging window information
+	@FXML
+	private Button serachtag_butt;
+
+	@FXML
+	private Button addtag_butt;
+
+	@FXML
+	private ListView<VideoTag> tagSegmentListView;
+	private ObservableList<VideoTag> tagSegmentObservableList;
+
+	@FXML
+	private ListView<KeyWord> keywordListView;
+	private ObservableList<KeyWord> keywordObservableList;
+
+	private Map<String, List<VideoTag>> keyTagMap;
 
 	// Media Play variables
 
@@ -206,18 +238,33 @@ public class VideoEditorController implements Initializable {
 		initializeSliders();
 		initializeMediaPlayer();
 
-		// initialize listview
+		// initialize anotationlistview
 		// ListViewController.initializeListView(listView, listItems);
-		listView.setItems(listItems);
-		listView.setCellFactory(
-				(ListView<AbstractComp> l) -> new AnnotationListRectCell<AbstractComp>(listView, listItems, compList));
+		compListView.setItems(compObservableList);
+		compListView.setCellFactory((ListView<AbstractComp> l) -> new AnnotationListRectCell<AbstractComp>(compListView,
+				compObservableList, compList));
+
+		intializeTaggingPane();
+	}
+
+	private void intializeTaggingPane() {
+
+		keyTagMap = new HashMap<>();
+
+		keywordListView.setItems(keywordObservableList);
+		keywordListView.setCellFactory(
+				(ListView<KeyWord> l) -> new TagKeywordListRectCell<KeyWord>(keywordListView, keywordObservableList));
+
+		tagSegmentListView.setItems(tagSegmentObservableList);
+		tagSegmentListView
+				.setCellFactory((ListView<VideoTag> l) -> new VideoTagListRectCell<VideoTag>(tagSegmentListView,
+						tagSegmentObservableList));
 
 	}
 
 	public void initializeMediaPlayer() {
 		mediaPlayerComponent.getMediaPlayer().prepareMedia(PATH_TO_VIDEO);
-		mediaPlayerComponent.getMediaPlayer().mute();
-
+		// mediaPlayerComponent.getMediaPlayer().mute();
 	}
 
 	// timeline related changes
@@ -226,14 +273,15 @@ public class VideoEditorController implements Initializable {
 		timeSlider.setMaxWidth(Double.MAX_VALUE);
 		timeSlider.setMajorTickUnit(10.0);
 		timeSlider.setShowTickMarks(true);
-		Duration duration = new Duration(mediaPlayerComponent.getMediaPlayer().getLength());
 		timeSlider.valueProperty().addListener(new InvalidationListener() {
 			public void invalidated(Observable ov) {
 				try {
 					if (timeSlider.isValueChanging()) {
+						Duration duration = new Duration(mediaPlayerComponent.getMediaPlayer().getLength());
 						// multiply duration by percentage calculated by slider
 						// position
 						int newTime = (int) duration.multiply(timeSlider.getValue() / 100.0).toMillis();
+						System.out.println("timeSlider.valueProperty " + newTime);
 						mediaPlayerComponent.getMediaPlayer().setTime(newTime);
 					}
 
@@ -257,12 +305,19 @@ public class VideoEditorController implements Initializable {
 							TimeUnit.MILLISECONDS.toSeconds(newTime)
 									- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(newTime)));
 					timeLabel.setText(s);
-					System.out.println(newTime + " " + s);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+
+	public Map<String, List<VideoTag>> getKeyTagMap() {
+		return keyTagMap;
+	}
+
+	public void setKeyTagMap(Map<String, List<VideoTag>> keyTagMap) {
+		this.keyTagMap = keyTagMap;
 	}
 
 	private void initializeButtons() {
@@ -293,6 +348,8 @@ public class VideoEditorController implements Initializable {
 		ButtonForController.initializeNewButton(this, openvideo_butt, mediaPlayerComponent.getMediaPlayer());
 
 		ButtonForController.initializeConvertButton(this, convert_butt);
+
+		ButtonForController.initializeAddTagButton(this, addtag_butt);
 
 	}
 
@@ -371,7 +428,15 @@ public class VideoEditorController implements Initializable {
 						MarkerPopUp info = addPopUpPanel(baseRectWithScroll, abstractComp);
 						playerHolder.getChildren().addAll(baseRectWithScroll, info.getView());
 						abstractComp.setMarkerPopup(info);
+					} else if (abstractComp != null && abstractComp instanceof CircleComp) {
+						baseRectWithScroll = ButtonForController.createDraggableRectangle(abstractComp,
+								event.getSceneX() - 37, event.getSceneY() - 45, baseRectWidth, baseRectHeight);
+						Shape add2dShape = add2dShape(baseRectWithScroll);
+						abstractComp.setShape(add2dShape);
+						playerHolder.getChildren().addAll(baseRectWithScroll, add2dShape);
+
 					} else {
+
 						playerHolder.getChildren().add(baseRectWithScroll);
 					}
 
@@ -399,46 +464,6 @@ public class VideoEditorController implements Initializable {
 				event.consume();
 			}
 
-			private void showEndSlider() {
-				getEndtimeLabel().setVisible(true);
-				getEndtimeSlider().setVisible(true);
-
-				getEndtimeSlider().setValue(timeSlider.getValue());
-				getEndtimeLabel().setText(timeLabel.getText());
-
-				Duration duration = new Duration(mediaPlayerComponent.getMediaPlayer().getLength());
-				getEndtimeSlider().valueProperty().addListener(new InvalidationListener() {
-					public void invalidated(Observable ov) {
-						try {
-							if (getEndtimeSlider().isValueChanging()) {
-								int newTime = (int) duration.multiply(getEndtimeSlider().getValue() / 100.0).toMillis();
-								mediaPlayerComponent.getMediaPlayer().setTime(newTime);
-								String s = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(newTime),
-										TimeUnit.MILLISECONDS.toMinutes(newTime)
-												- TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(newTime)),
-										TimeUnit.MILLISECONDS.toSeconds(newTime)
-												- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(newTime)));
-								endtimeLabel.setText(s);
-							}
-
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-
-				getEndtimeSlider().visibleProperty()
-						.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
-					Boolean isTrue = (Boolean) newValue;
-					if (!isTrue) {
-						int newTime = (int) duration.multiply(timeSlider.getValue() / 100.0).toMillis();
-						mediaPlayerComponent.getMediaPlayer().setTime(newTime);
-					} else {
-						timeLabel.setVisible(true);
-					}
-				});
-			}
-
 			private AbstractComp getAbstractCompFromName(String text) {
 				AbstractComp comp = null;
 				try {
@@ -450,6 +475,10 @@ public class VideoEditorController implements Initializable {
 						comp = new SpotLight();
 					} else if (text.equalsIgnoreCase("Marker")) {
 						comp = new AnnotationMarkers();
+					} else if (text != null && !text.equalsIgnoreCase("")) {
+						if (text.equalsIgnoreCase("Circle")) {
+							comp = new CircleComp();
+						}
 					}
 
 				} catch (Exception e) {
@@ -580,6 +609,53 @@ public class VideoEditorController implements Initializable {
 
 			}
 
+			private Shape add2dShape(Rectangle rect) {
+				double diameter = Math.min(rect.getHeight(), rect.getWidth());
+				Circle circle = new Circle(diameter / 2);
+				circle.setCenterX(rect.getX() + rect.getWidth() / 2);
+				circle.setCenterY(rect.getY() + rect.getHeight() / 2);
+				rect.widthProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					Double width = (Double) newValue;
+					if (rect.getHeight() != width)
+						rect.setHeight(width);
+					double diameter1 = Math.min(rect.getHeight(), rect.getWidth());
+					circle.setRadius(diameter1 / 2);
+					circle.setCenterX(rect.getX() + rect.getWidth() / 2);
+					circle.setCenterY(rect.getY() + rect.getHeight() / 2);
+				});
+
+				rect.heightProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					Double height = (Double) newValue;
+					if (rect.getHeight() != height)
+						rect.setHeight(height);
+					double diameter2 = Math.min(rect.getHeight(), rect.getWidth());
+					circle.setRadius(diameter2 / 2);
+					circle.setCenterX(rect.getX() + rect.getWidth() / 2);
+					circle.setCenterY(rect.getY() + rect.getHeight() / 2);
+				});
+
+				rect.xProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					circle.setCenterX(rect.getX() + rect.getWidth() / 2);
+					circle.setCenterY(rect.getY() + rect.getHeight() / 2);
+				});
+
+				rect.yProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					circle.setCenterX(rect.getX() + rect.getWidth() / 2);
+					circle.setCenterY(rect.getY() + rect.getHeight() / 2);
+				});
+
+				rect.visibleProperty()
+						.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+					Boolean isTrue = (Boolean) newValue;
+					if (!isTrue) {
+						AnchorPane parent = (AnchorPane) circle.getParent();
+						parent.getChildren().remove(circle);
+					}
+				});
+
+				return circle;
+			}
+
 			private TextArea addtextArea(Rectangle rect) {
 
 				TextArea ta = new TextArea("");
@@ -620,6 +696,46 @@ public class VideoEditorController implements Initializable {
 
 		});
 
+	}
+
+	public void showEndSlider() {
+		getEndtimeLabel().setVisible(true);
+		getEndtimeSlider().setVisible(true);
+
+		getEndtimeSlider().setValue(timeSlider.getValue());
+		getEndtimeLabel().setText(timeLabel.getText());
+
+		Duration duration = new Duration(mediaPlayerComponent.getMediaPlayer().getLength());
+		getEndtimeSlider().valueProperty().addListener(new InvalidationListener() {
+			public void invalidated(Observable ov) {
+				try {
+					if (getEndtimeSlider().isValueChanging()) {
+						int newTime = (int) duration.multiply(getEndtimeSlider().getValue() / 100.0).toMillis();
+						mediaPlayerComponent.getMediaPlayer().setTime(newTime);
+						String s = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(newTime),
+								TimeUnit.MILLISECONDS.toMinutes(newTime)
+										- TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(newTime)),
+								TimeUnit.MILLISECONDS.toSeconds(newTime)
+										- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(newTime)));
+						endtimeLabel.setText(s);
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		getEndtimeSlider().visibleProperty()
+				.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+					Boolean isTrue = (Boolean) newValue;
+					if (!isTrue) {
+						int newTime = (int) duration.multiply(timeSlider.getValue() / 100.0).toMillis();
+						mediaPlayerComponent.getMediaPlayer().setTime(newTime);
+					} else {
+						timeLabel.setVisible(true);
+					}
+				});
 	}
 
 	private void fitImageViewSizeForMe(float width, float height) {
@@ -733,11 +849,11 @@ public class VideoEditorController implements Initializable {
 	}
 
 	public ListView<AbstractComp> getListView() {
-		return listView;
+		return compListView;
 	}
 
 	public void setListView(ListView<AbstractComp> listView) {
-		this.listView = listView;
+		this.compListView = listView;
 	}
 
 	public Slider getEndtimeSlider() {
@@ -757,11 +873,11 @@ public class VideoEditorController implements Initializable {
 	}
 
 	public ObservableList<AbstractComp> getListItems() {
-		return listItems;
+		return compObservableList;
 	}
 
 	public void setListItems(ObservableList<AbstractComp> listItems) {
-		this.listItems = listItems;
+		this.compObservableList = listItems;
 	}
 
 	public int getIndex() {
@@ -814,6 +930,58 @@ public class VideoEditorController implements Initializable {
 
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+	}
+
+	public ListView<AbstractComp> getCompListView() {
+		return compListView;
+	}
+
+	public void setCompListView(ListView<AbstractComp> compListView) {
+		this.compListView = compListView;
+	}
+
+	public ObservableList<AbstractComp> getCompObservableList() {
+		return compObservableList;
+	}
+
+	public void setCompObservableList(ObservableList<AbstractComp> compObservableList) {
+		this.compObservableList = compObservableList;
+	}
+
+	public ListView<VideoTag> getTagSegmentListView() {
+		return tagSegmentListView;
+	}
+
+	public void setTagSegmentListView(ListView<VideoTag> tagSegmentListView) {
+		this.tagSegmentListView = tagSegmentListView;
+	}
+
+	public ObservableList<VideoTag> getTagSegmentObservableList() {
+		return tagSegmentObservableList;
+	}
+
+	public void setTagSegmentObservableList(ObservableList<VideoTag> tagSegmentObservableList) {
+		this.tagSegmentObservableList = tagSegmentObservableList;
+	}
+
+	public ListView<KeyWord> getKeywordListView() {
+		return keywordListView;
+	}
+
+	public void setKeywordListView(ListView<KeyWord> keywordListView) {
+		this.keywordListView = keywordListView;
+	}
+
+	public ObservableList<KeyWord> getKeywordObservableList() {
+		return keywordObservableList;
+	}
+
+	public void setKeywordObservableList(ObservableList<KeyWord> keywordObservableList) {
+		this.keywordObservableList = keywordObservableList;
+	}
+
+	public void setCompList(Map<Integer, AbstractComp> compList) {
+		this.compList = compList;
 	}
 
 }
