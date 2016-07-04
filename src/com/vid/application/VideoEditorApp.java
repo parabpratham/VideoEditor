@@ -1,8 +1,5 @@
 package com.vid.application;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.vid.controller.VideoEditorController;
 
 import javafx.application.Application;
