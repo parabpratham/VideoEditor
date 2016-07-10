@@ -1,5 +1,6 @@
 package com.vid.controller;
 
+import com.vid.commons.Helper;
 import com.vid.tagging.VideoTag;
 
 import javafx.collections.ObservableList;
@@ -42,7 +43,7 @@ public class VideoTagListRectCell<T> extends ListCell<T> {
 			hbox.setMaxHeight(15);
 			hbox.setSpacing(5);
 			checkBox = new CheckBox();
-			textLabel = new Label(comp.getSegmentId() + "" + comp.getStartTime());
+			textLabel = new Label("Tag" + comp.getSegmentId() + "--" + Helper.setTotalTime((long) comp.getStartTime()));
 			hbox.getChildren().addAll(checkBox, textLabel);
 			setGraphic(hbox);
 		} else {

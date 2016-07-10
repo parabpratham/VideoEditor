@@ -7,24 +7,17 @@ import com.vid.controller.AbstractAddController;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.paint.Color;
 
-public class NoteAddController extends AbstractAddController {
+public class TextAddController extends AbstractAddController {
 
-	@FXML
-	private ColorPicker bgcolor;
 	@FXML
 	private Slider opacity;
-	@FXML
-	private Tab tab_text;
 	@FXML
 	private TextArea textbox;
 	@FXML
@@ -42,30 +35,20 @@ public class NoteAddController extends AbstractAddController {
 	@FXML
 	private ToggleButton font_strikeout;
 
-	public NoteAddController() {
-
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		super.initialize(location, resources);
-		getBgcolor().setValue(Color.WHITE);
 
 		fonts.setItems(FXCollections.observableList(getFamilies()));
 		font_size.setItems(FXCollections.observableList(getFontsizelist()));
-
-		// fonts.getSelectionModel().selectFirst();
-		// font_size.getSelectionModel().selectFirst();
-
 	}
 
-	public Tab getTab_text() {
-		return tab_text;
+	public Slider getOpacity() {
+		return opacity;
 	}
 
-	public void setTab_text(Tab tab_text) {
-		this.tab_text = tab_text;
+	public void setOpacity(Slider opacity) {
+		this.opacity = opacity;
 	}
 
 	public TextArea getTextbox() {
@@ -76,8 +59,15 @@ public class NoteAddController extends AbstractAddController {
 		this.textbox = textbox;
 	}
 
+	public ComboBox<String> getFonts() {
+		return fonts;
+	}
+
+	public void setFonts(ComboBox<String> fonts) {
+		this.fonts = fonts;
+	}
+
 	public ChoiceBox<Integer> getFont_size() {
-		System.out.println("Note getFontSize");
 		return font_size;
 	}
 
@@ -123,30 +113,6 @@ public class NoteAddController extends AbstractAddController {
 
 	public void setFont_strikeout(ToggleButton font_strikeout) {
 		this.font_strikeout = font_strikeout;
-	}
-
-	public ComboBox<String> getFonts() {
-		return fonts;
-	}
-
-	public void setFonts(ComboBox<String> fonts) {
-		this.fonts = fonts;
-	}
-
-	public ColorPicker getBgcolor() {
-		return bgcolor;
-	}
-
-	public void setBgcolor(ColorPicker bgcolor) {
-		this.bgcolor = bgcolor;
-	}
-
-	public Slider getOpacity() {
-		return opacity;
-	}
-
-	public void setOpacity(Slider opacity) {
-		this.opacity = opacity;
 	}
 
 }

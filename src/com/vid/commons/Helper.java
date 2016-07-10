@@ -106,4 +106,8 @@ public class Helper {
 		return new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
 	}
 
+	public static void main(String[] args) {
+		System.out.println(setTotalTime(432435));
+	}
+
 }

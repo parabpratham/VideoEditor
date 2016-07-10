@@ -2,7 +2,7 @@ package com.vid.overlay.comp.master;
 
 public enum SHAPE_TYPE {
 
-	CIRCLE, RECTANGLE, LINE, OVAL, POLYGON, STRING, IMAGE, ARROW, ROUNDED_RECTANGLE;
+	CIRCLE, RECTANGLE, LINE, OVAL, POLYGON, STRING, IMAGE, ARROW, ROUNDED_RECTANGLE,TEXT;
 
 	public static SHAPE_TYPE getFromName(String name) {
 		SHAPE_TYPE[] values = values();
@@ -10,6 +10,7 @@ public enum SHAPE_TYPE {
 			if (jcomponent_TYPE.name().equalsIgnoreCase(name))
 				return jcomponent_TYPE;
 		}
+		
 		return null;
 	}
 

@@ -40,238 +40,242 @@ public class CustomPopOver extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		new NativeDiscovery().discover();
+		try {
+			new NativeDiscovery().discover();
 
-		Group group = new Group();
+			Group group = new Group();
 
-		Image image = new Image("file:C:\\1.jpg");
+			Image image = new Image("file:C:\\1.jpg");
 
-		final ImageView iew = new ImageView(image);
+			final ImageView iew = new ImageView(image);
 
-		final Rectangle rect = new Rectangle();
+			final Rectangle rect = new Rectangle();
 
-		rect.setStroke(Color.BLACK);
+			rect.setStroke(Color.BLACK);
 
-		rect.setFill(Color.CORAL);
+			rect.setFill(Color.CORAL);
 
-		rect.setWidth(220);
-		iew.setFitWidth(220);
+			rect.setWidth(220);
+			iew.setFitWidth(220);
 
-		rect.setHeight(220);
-		iew.setFitHeight(220);
+			rect.setHeight(220);
+			iew.setFitHeight(220);
 
-		group.getChildren().add(iew);
+			group.getChildren().add(iew);
 
-		circle = new Circle();
+			circle = new Circle();
 
-		circle.setStroke(Color.BLACK);
+			circle.setStroke(Color.BLACK);
 
-		circle.setFill(Color.WHITE);
+			circle.setFill(Color.WHITE);
 
-		group.getChildren().add(circle);
+			group.getChildren().add(circle);
 
-		line1 = new Line();
+			line1 = new Line();
 
-		line1.setFill(Color.BLACK);
+			line1.setFill(Color.BLACK);
 
-		group.getChildren().add(line1);
+			group.getChildren().add(line1);
 
-		line2 = new Line();
+			line2 = new Line();
 
-		line2.setFill(Color.BLACK);
+			line2.setFill(Color.BLACK);
 
-		group.getChildren().add(line2);
+			group.getChildren().add(line2);
 
-		rect.setOnScroll(new EventHandler<ScrollEvent>() {
+			rect.setOnScroll(new EventHandler<ScrollEvent>() {
 
-			@Override
+				@Override
 
-			public void handle(ScrollEvent evt) {
+				public void handle(ScrollEvent evt) {
 
-				double delta = evt.getDeltaY();
+					double delta = evt.getDeltaY();
 
-				rect.setWidth(Math.max(100,
+					rect.setWidth(Math.max(100,
 
-				Math.min(500, rect.getWidth() + delta)));
+					Math.min(500, rect.getWidth() + delta)));
 
-				rect.setHeight(Math.max(100,
+					rect.setHeight(Math.max(100,
 
-				Math.min(500, rect.getHeight() + delta)));
-
-			}
-
-		});
-
-		iew.setOnScroll(new EventHandler<ScrollEvent>() {
-
-			@Override
-
-			public void handle(ScrollEvent evt) {
-
-				double delta = evt.getDeltaY();
-
-				rect.setWidth(Math.max(100,
-
-				Math.min(500, rect.getWidth() + delta)));
-
-				rect.setHeight(Math.max(100,
-
-				Math.min(500, rect.getHeight() + delta)));
-
-			}
-
-		});
-
-		iew.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-
-			public void handle(MouseEvent evt) {
-
-				if (popOver != null && !popOver.isDetached()) {
-
-					popOver.hide();
+					Math.min(500, rect.getHeight() + delta)));
 
 				}
 
-				if (evt.getClickCount() == 2) {
+			});
 
-					if (popOver != null && popOver.isShowing()) {
+			iew.setOnScroll(new EventHandler<ScrollEvent>() {
 
-						popOver.hide(Duration.ZERO);
+				@Override
+
+				public void handle(ScrollEvent evt) {
+
+					double delta = evt.getDeltaY();
+
+					rect.setWidth(Math.max(100,
+
+					Math.min(500, rect.getWidth() + delta)));
+
+					rect.setHeight(Math.max(100,
+
+					Math.min(500, rect.getHeight() + delta)));
+
+				}
+
+			});
+
+			iew.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+
+				public void handle(MouseEvent evt) {
+
+					if (popOver != null && !popOver.isDetached()) {
+
+						popOver.hide();
 
 					}
 
-					targetX = evt.getScreenX();
+					if (evt.getClickCount() == 2) {
 
-					targetY = evt.getScreenY();
+						if (popOver != null && popOver.isShowing()) {
 
-					popOver = createPopOver();
+							popOver.hide(Duration.ZERO);
 
-					double size = 3;
+						}
 
-					line1.setStartX(evt.getX() - size);
+						targetX = evt.getScreenX();
 
-					line1.setStartY(evt.getY() - size);
+						targetY = evt.getScreenY();
 
-					line1.setEndX(evt.getX() + size);
+						popOver = createPopOver();
 
-					line1.setEndY(evt.getY() + size);
+						double size = 3;
 
-					line2.setStartX(evt.getX() + size);
+						line1.setStartX(evt.getX() - size);
 
-					line2.setStartY(evt.getY() - size);
+						line1.setStartY(evt.getY() - size);
 
-					line2.setEndX(evt.getX() - size);
+						line1.setEndX(evt.getX() + size);
 
-					line2.setEndY(evt.getY() + size);
+						line1.setEndY(evt.getY() + size);
 
-					circle.setCenterX(evt.getX());
+						line2.setStartX(evt.getX() + size);
 
-					circle.setCenterY(evt.getY());
+						line2.setStartY(evt.getY() - size);
 
-					circle.setRadius(size * 3);
+						line2.setEndX(evt.getX() - size);
 
-					/*
-					 * if (autoPosition.isSelected()) {
-					 * 
-					 * popOver.show(rect);
-					 * 
-					 * } else {
-					 */
+						line2.setEndY(evt.getY() + size);
 
-					popOver.show(iew);
+						circle.setCenterX(evt.getX());
 
-					// }
+						circle.setCenterY(evt.getY());
 
-				}
+						circle.setRadius(size * 3);
 
-			}
+						/*
+						 * if (autoPosition.isSelected()) {
+						 * 
+						 * popOver.show(rect);
+						 * 
+						 * } else {
+						 */
 
-		});
+						popOver.show(iew);
 
-		rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-
-			public void handle(MouseEvent evt) {
-
-				if (popOver != null && !popOver.isDetached()) {
-
-					popOver.hide();
-
-				}
-
-				if (evt.getClickCount() == 2) {
-
-					if (popOver != null && popOver.isShowing()) {
-
-						popOver.hide(Duration.ZERO);
+						// }
 
 					}
 
-					targetX = evt.getScreenX();
+				}
 
-					targetY = evt.getScreenY();
+			});
 
-					popOver = createPopOver();
+			rect.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-					double size = 3;
+				@Override
 
-					line1.setStartX(evt.getX() - size);
+				public void handle(MouseEvent evt) {
 
-					line1.setStartY(evt.getY() - size);
+					if (popOver != null && !popOver.isDetached()) {
 
-					line1.setEndX(evt.getX() + size);
+						popOver.hide();
 
-					line1.setEndY(evt.getY() + size);
+					}
 
-					line2.setStartX(evt.getX() + size);
+					if (evt.getClickCount() == 2) {
 
-					line2.setStartY(evt.getY() - size);
+						if (popOver != null && popOver.isShowing()) {
 
-					line2.setEndX(evt.getX() - size);
+							popOver.hide(Duration.ZERO);
 
-					line2.setEndY(evt.getY() + size);
+						}
 
-					circle.setCenterX(evt.getX());
+						targetX = evt.getScreenX();
 
-					circle.setCenterY(evt.getY());
+						targetY = evt.getScreenY();
 
-					circle.setRadius(size * 3);
+						popOver = createPopOver();
 
-					/*
-					 * if (autoPosition.isSelected()) {
-					 * 
-					 * popOver.show(rect);
-					 * 
-					 * } else {
-					 */
+						double size = 3;
 
-					popOver.show(iew, targetX, targetY);
+						line1.setStartX(evt.getX() - size);
 
-					// }
+						line1.setStartY(evt.getY() - size);
+
+						line1.setEndX(evt.getX() + size);
+
+						line1.setEndY(evt.getY() + size);
+
+						line2.setStartX(evt.getX() + size);
+
+						line2.setStartY(evt.getY() - size);
+
+						line2.setEndX(evt.getX() - size);
+
+						line2.setEndY(evt.getY() + size);
+
+						circle.setCenterX(evt.getX());
+
+						circle.setCenterY(evt.getY());
+
+						circle.setRadius(size * 3);
+
+						/*
+						 * if (autoPosition.isSelected()) {
+						 * 
+						 * popOver.show(rect);
+						 * 
+						 * } else {
+						 */
+
+						popOver.show(iew, targetX, targetY);
+
+						// }
+
+					}
 
 				}
 
-			}
+			});
 
-		});
+			StackPane stackPane = new StackPane();
 
-		StackPane stackPane = new StackPane();
+			stackPane.getChildren().add(iew);
 
-		stackPane.getChildren().add(iew);
+			BorderPane.setMargin(stackPane, new Insets(10));
 
-		BorderPane.setMargin(stackPane, new Insets(10));
+			BorderPane borderPane = new BorderPane();
 
-		BorderPane borderPane = new BorderPane();
+			borderPane.setCenter(stackPane);
 
-		borderPane.setCenter(stackPane);
+			Scene scene = new Scene(borderPane);
+			primaryStage.setScene(scene);
 
-		Scene scene = new Scene(borderPane);
-		primaryStage.setScene(scene);
-
-		primaryStage.show();
+			primaryStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private PopOver createPopOver() {

@@ -14,8 +14,12 @@ import com.vid.commons.MatroskaAttachment;
 import com.vid.comp.Jcomp.AbstractComp;
 import com.vid.comp.Jcomp.BoundedRectangle;
 import com.vid.comp.Jcomp.Title;
+import com.vid.comp.Scomp.TextComp;
+import com.vid.tagging.KeyWord;
+import com.vid.tagging.VideoTag;
 
 import javafx.beans.value.ChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -100,7 +104,9 @@ public class ButtonForController {
 		Wrapper<Point2D> mouseLocation = new Wrapper<>();
 
 		// setUpDragging(resizeHandleNW, mouseLocation);
-		setUpDragging(resizeHandleSE, mouseLocation);
+		if (!(comp instanceof TextComp)) {
+			setUpDragging(resizeHandleSE, mouseLocation);
+		}
 		if (!(comp instanceof Title)) {
 			setUpDragging(moveHandle, mouseLocation);
 		}
@@ -298,52 +304,11 @@ public class ButtonForController {
 						}
 
 						// 2. Generate XML Map (Along with it keep a map of to
-						// be
-						// attached files //
+						// be attached files //
 
 						List<MatroskaAttachment> attachments = new ArrayList<>();
 						Map<Integer, AbstractComp> compList = controller.getCompList();
-						Set<Integer> keySet = compList.keySet();
-
-						String xmlText = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-						xmlText += "<Video_anno_data>";
-						for (Integer i : keySet) {
-							AbstractComp abstractComp = compList.get(i);
-							xmlText += abstractComp.toXml();
-
-							if (abstractComp.getBgfilepath() != null
-									&& !abstractComp.getBgfilepath().equalsIgnoreCase("")) {
-								MatroskaAttachment att = new MatroskaAttachment();
-								att.setFile(abstractComp.getBgfilepath());
-								att.setType("image/jpeg");
-								att.setDescription(abstractComp.getId() + " " + abstractComp.getAnnName());
-								System.out.println(abstractComp.getBgfilepath());
-								attachments.add(att);
-							}
-						}
-						xmlText += "</Video_anno_data>";
-
-						// 3. Store in temp folder
-						File overlayOp = new File(outDir + filename + ".xml");
-						FileWriter writter = null;
-						BufferedWriter bufferedWriter = null;
-						try {
-							writter = new FileWriter(overlayOp);
-							bufferedWriter = new BufferedWriter(writter);
-							bufferedWriter.write(xmlText);
-							bufferedWriter.flush();
-						} catch (IOException e) {
-							e.printStackTrace();
-						} finally {
-							try {
-								if (bufferedWriter != null)
-									bufferedWriter.close();
-								if (writter != null)
-									writter.close();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						}
+						generateXMLFile(controller, filename, attachments, compList);
 
 						// 5. Add xml to the attachments
 						MatroskaAttachment att = new MatroskaAttachment();
@@ -389,16 +354,77 @@ public class ButtonForController {
 					}
 				}
 			}
+
+			private void generateXMLFile(VideoEditorController controller, String filename,
+					List<MatroskaAttachment> attachments, Map<Integer, AbstractComp> compList) {
+				
+				Set<Integer> keySet = compList.keySet();
+				
+				String xmlText = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+				xmlText += "<Video_information> \n";
+				xmlText += "<Video_anno_data>\n";
+				for (Integer i : keySet) {
+					AbstractComp abstractComp = compList.get(i);
+					xmlText += abstractComp.toXml();
+
+					if (abstractComp.getBgfilepath() != null && !abstractComp.getBgfilepath().equalsIgnoreCase("")) {
+						MatroskaAttachment att = new MatroskaAttachment();
+						att.setFile(abstractComp.getBgfilepath());
+						att.setType("image/jpeg");
+						att.setDescription(abstractComp.getId() + " " + abstractComp.getAnnName());
+						System.out.println(abstractComp.getBgfilepath());
+						attachments.add(att);
+					}
+				}
+				xmlText += "</Video_anno_data>";
+
+				xmlText += "<Video_tag_data> \n";
+				xmlText += "<Video_tags> \n";
+				ObservableList<VideoTag> tagSegmentList = controller.getTagSegmentObservableList();
+				for (VideoTag videoTag : tagSegmentList) {
+					xmlText += videoTag.toXml();
+				}
+				xmlText += "</Video_tags> \n";
+				xmlText += "<KeyWords> \n";
+				ObservableList<KeyWord> keywordList = controller.getKeywordObservableList();
+				for (KeyWord word : keywordList) {
+					xmlText += word.toXml();
+				}
+				xmlText += "</KeyWords> \n";
+				xmlText += "</Video_tag_data> \n";
+				xmlText += "</Video_information> \n";
+
+				// 3. Store in temp folder
+				File overlayOp = new File(outDir + filename + ".xml");
+				FileWriter writter = null;
+				BufferedWriter bufferedWriter = null;
+				try {
+					writter = new FileWriter(overlayOp);
+					bufferedWriter = new BufferedWriter(writter);
+					bufferedWriter.write(xmlText);
+					bufferedWriter.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if (bufferedWriter != null)
+							bufferedWriter.close();
+						if (writter != null)
+							writter.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 		});
 
 	}
 
 	public static void main(String[] args) {
 
-		String cmd = "C:/Program Files/MKVToolNix/mkvmerge.exe -o I:/workspace/SpringWorkspace/VideoEditor/Sample/out/JaiMataDi_KingCircle.mp4.mkv C:/JaiMataDi_KingCircle.mp4 -A  "
-				+ "--attachment-description \"1 SpotLight\" --attachment-mime-type image/jpeg --attach-file C:/Users/hp/Desktop/_MG_1801.JPG "
-				+ "--attachment-description \"3 Marker\" --attachment-mime-type \"image/jpeg\" --attach-file C:/Users/hp/Desktop/_MG_1801.JPG "
-				+ "--atjtachment-description \"Annotations list file\" --attachment-mime-type \"xml/txt\" --attach-file I:/workspace/SpringWorkspace/VideoEditor/Sample/out/JaiMataDi_KingCircle.mp4.xml";
+		String cmd = "C:/Program Files/MKVToolNix/mkvmerge.exe -o C:/Users/hp/Desktop/test/out/JaiMataDi_KingCircle.mp4.mkv C:/Users/hp/Desktop/test/JaiMataDi_KingCircle.mp4 -A  "
+				+ "--attachment-description \"1 SpotLight\" --attachment-mime-type image/jpeg --attach-file C:/Users/hp/Desktop/test/_Untitled(2).JPG "
+				+ "--attachment-description \"Annotations list file\" --attachment-mime-type \"xml/txt\" --attach-file C:/Users/hp/Desktop/test/lec30.3gp.xml";
 		String cmd2 = "C:/Program Files/MKVToolNix/mkvmerge.exe -o I:/workspace/SpringWorkspace/VideoEditor/Sample/out/JaiMataDi_KingCircle.mp4.mkv C:/JaiMataDi_KingCircle.mp4 -A  "
 				+ "--attachment-description \"2 Marker\" --attachment-mime-type image/jpeg --attach-file C:/Users/hp/Desktop/_MG_1801.JPG "
 				+ "--attachment-description \"Annotations list file\" --attachment-mime-type xml/txt --attach-file I:/workspace/SpringWorkspace/VideoEditor/Sample/out/JaiMataDi_KingCircle.mp4.xml";
@@ -410,7 +436,7 @@ public class ButtonForController {
 			Runtime.getRuntime().exec(
 					mkvToolPath + " -o " + outDir + filename + ".mkv" + " " + VideoEditorController.getPathToVideo());
 
-			Runtime.getRuntime().exec(cmd3);
+			Runtime.getRuntime().exec(cmd);
 			System.out.println(
 					mkvToolPath + " -o " + VideoEditorController.getPathToVideo() + " " + outDir + filename + ".mkv");
 			System.out.println(cmd);
@@ -458,7 +484,7 @@ public class ButtonForController {
 
 				FXMLLoader loader = new FXMLLoader(
 						getClass().getClassLoader().getResource(AddTagController.getFXMLPath()));
-				AnnotationPropertyWindow.setupAddTagWindow(videoEditorController, loader,mediaPlayer);
+				AnnotationPropertyWindow.setupAddTagWindow(videoEditorController, loader, mediaPlayer);
 			}
 
 		});

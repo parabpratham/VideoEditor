@@ -1,19 +1,31 @@
-package com.vid.comp.Jcomp;
+package com.vid.comp.Scomp;
 
 import java.net.URL;
 
+import com.vid.comp.Jcomp.StaticComponent;
+import com.vid.overlay.comp.master.SHAPE_TYPE;
+
 import javafx.scene.image.Image;
 
-public class SpotLight extends AbstractComp {
+public class TextComp extends StaticComponent {
 
-	public SpotLight() {
+	public TextComp() {
 		setTextIncluded(false);
 		setBgImageOption(false);
 		setInfopanel(true);
-		setAnn_type("com.vid.comp.Jcomp.SpotLight");
-		setAnnName("SpotLight");
-		setControllerClass("com.vid.controller.comp.SpotLightAddController");
-		setFXMLPath("fxml/addcompcont/SpotLight_add_popup.fxml");
+		setAnn_type(TextComp.class.getName());
+		setAnnName("Text");
+		setControllerClass("com.vid.controller.comp.TextAddController");
+		setFXMLPath("fxml/addcompcont/Text_add_popup.fxml");
+		setShapeType(SHAPE_TYPE.TEXT);
+
+	}
+
+	@Override
+	public Image getGraphic() {
+		URL resource = getClass().getClassLoader().getResource("icons/Text.png");
+		Image image = new Image("file:" + resource.getPath());
+		return image;
 	}
 
 	@Override
@@ -25,14 +37,9 @@ public class SpotLight extends AbstractComp {
 		annot += "<parameters set=\"" + 1 + "\"> \n";
 		annot += "<StartX>" + getStartX() + "</StartX> \n";
 		annot += "<StartY>" + getStartY() + "</StartY> \n";
-		annot += "<Width>" + getWidth() + "</Width> \n";
-		annot += "<Height>" + getHeight() + "</Height> \n";
-		annot += "<BgColor>" + getBgColor() + "</BgColor> \n";
-		annot += "<Bgfilepath>" + getBgfilepath() + "</Bgfilepath> \n";
-		annot += "<Showonhover>" + isShowonhover() + "</Showonhover> \n";
-		annot += "<Fillbg>" + isFillbg() + "</Fillbg> \n";
 		annot += "<DisplayString>" + getDisplayString() + "</DisplayString> \n";
-		annot += "<DisplayStringColor>" + getDisplayStringColor() + "</DisplayStringColor> \n";
+		annot += "<DisplayStringColor> " + getDisplayStringColor() + "</DisplayStringColor> \n";
+		annot += "<Underline>" + isUnderline() + "</Underline>\n";
 		annot += "<Font>" + getFont() + "</Font> \n";
 		annot += "<Font_size>" + getFont_size() + "</Font_size> \n";
 		annot += "<Bold>" + isBold() + "</Bold>\n";
@@ -43,16 +50,9 @@ public class SpotLight extends AbstractComp {
 		annot += "</annotation> \n";
 		return annot;
 	}
-	
-	@Override
-	public Image getGraphic() {
-		URL resource = getClass().getClassLoader().getResource("icons/spot_light.png");
-		Image image = new Image("file:" + resource.getPath());
-		return image;
-	}
 
 	public static void main(String[] args) {
-		SpotLight label = new SpotLight();
+		TextComp label = new TextComp();
 		label.getGraphic();
 	}
 

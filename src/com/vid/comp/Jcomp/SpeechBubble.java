@@ -25,12 +25,12 @@ public class SpeechBubble extends AbstractComp {
 
 	@Override
 	public String toXml() {
-		String annot = "<annotation id=\"" + getId() + "\" \n type=\"" + getAnn_type() + "\">\n" + "<starttime>"
-				+ getStartTime() + "</starttime>\n";
+		String annot = "<annotation id=\"" + getId() + "\" type=\"" + getAnn_type() + "\">\n";
+		annot += "<starttime>" + getStartTime() + "</starttime>\n";
 		annot += "<endtime> " + getEndTime() + "</endtime>";
 		annot += "<comp_type>JCOMPONENT</comp_type>";
 		annot += "<parameters set=\"" + 1 + "\"> \n";
-		annot += "<StartX> " + getStartX() + "</StartX> \n";
+		annot += "<StartX>" + getStartX() + "</StartX> \n";
 		annot += "<StartY>" + getStartY() + "</StartY> \n";
 		annot += "<Width>" + getWidth() + "</Width> \n";
 		annot += "<Height>" + getHeight() + "</Height> \n";
@@ -38,8 +38,8 @@ public class SpeechBubble extends AbstractComp {
 		annot += "<Bgfilepath>" + getBgfilepath() + "</Bgfilepath> \n";
 		annot += "<Showonhover>" + isShowonhover() + "</Showonhover> \n";
 		annot += "<Fillbg>" + isFillbg() + "</Fillbg> \n";
-		annot += "<DisplayString> " + getDisplayString() + " </DisplayString> \n";
-		annot += "<DisplayStringColor> " + getDisplayString() + " </DisplayStringColor> \n";
+		annot += "<DisplayString>" + getDisplayString() + "</DisplayString> \n";
+		annot += "<DisplayStringColor> " + getDisplayString() + "</DisplayStringColor> \n";
 		annot += "<Font>" + getFont() + "</Font> \n";
 		annot += "<FontSize>" + getFont_size() + "</FontSize> \n";
 		annot += "<bold>" + isBold() + "</bold>\n";

@@ -24,20 +24,20 @@ public class Title extends AbstractComp {
 
 	@Override
 	public String toXml() {
-		String annot = "<annotation id=\"" + getId() + "\" \n type=\"" + getAnn_type() + "\">\n" + "<starttime>" + 0
-				+ "</starttime>\n";
+		String annot = "<annotation id=\"" + getId() + "\" type=\"" + getAnn_type() + "\">\n";
+		annot += "<starttime>" + 0 + "</starttime>\n";
 		annot += "<endtime> " + 0 + "</endtime>";
 		annot += "<comp_type>JCOMPONENT</comp_type>";
 		annot += "<parameters set=\"" + 1 + "\"> \n";
-		annot += "<StartX> " + getStartX() + "</StartX> \n";
+		annot += "<StartX>" + getStartX() + "</StartX> \n";
 		annot += "<StartY>" + getStartY() + "</StartY> \n";
 		annot += "<Popupinterval>" + getPopupinterval() + "</Popupinterval> \n";
 		annot += "<Underline>" + isUnderline() + "</Underline>\n";
 		annot += "<Width>" + getWidth() + "</Width> \n";
 		annot += "<Height>" + getHeight() + "</Height> \n";
 		annot += "<BgColor>" + getBgColor() + "</BgColor> \n";
-		annot += "<DisplayString> " + getDisplayString() + " </DisplayString> \n";
-		annot += "<DisplayStringColor> " + getDisplayStringColor() + " </DisplayStringColor> \n";
+		annot += "<DisplayString>" + getDisplayString() + "</DisplayString> \n";
+		annot += "<DisplayStringColor> " + getDisplayStringColor() + "</DisplayStringColor> \n";
 		annot += "<Font>" + getFont() + "</Font> \n";
 		annot += "<Font_size>" + getFont_size() + "</Font_size> \n";
 		annot += "<Bold>" + isBold() + "</Bold>\n";
@@ -49,9 +49,6 @@ public class Title extends AbstractComp {
 		return annot;
 	}
 
-
-	
-	
 	public static void main(String[] args) {
 		Title label = new Title();
 		label.getGraphic();

@@ -23,6 +23,9 @@ import com.vid.comp.Jcomp.Note;
 import com.vid.comp.Jcomp.SpotLight;
 import com.vid.comp.Jcomp.Title;
 import com.vid.comp.Scomp.CircleComp;
+import com.vid.comp.Scomp.LineComp;
+import com.vid.comp.Scomp.RectangleComp;
+import com.vid.comp.Scomp.TextComp;
 import com.vid.tagging.KeyWord;
 import com.vid.tagging.VideoTag;
 
@@ -57,9 +60,13 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -134,10 +141,13 @@ public class VideoEditorController implements Initializable {
 	private Button line_butt;
 
 	@FXML
-	private Button rec_butt;
+	private Button rect_butt;
 
 	@FXML
 	private Button cir_butt;
+
+	@FXML
+	private Button simple_text_butt;
 
 	// Playback buttons
 
@@ -198,7 +208,7 @@ public class VideoEditorController implements Initializable {
 	private ListView<KeyWord> keywordListView;
 	private ObservableList<KeyWord> keywordObservableList;
 
-	private Map<String, List<VideoTag>> keyTagMap;
+	private static Map<String, List<VideoTag>> keyTagMap;
 
 	// Media Play variables
 
@@ -312,12 +322,12 @@ public class VideoEditorController implements Initializable {
 		});
 	}
 
-	public Map<String, List<VideoTag>> getKeyTagMap() {
+	public static Map<String, List<VideoTag>> getKeyTagMap() {
 		return keyTagMap;
 	}
 
 	public void setKeyTagMap(Map<String, List<VideoTag>> keyTagMap) {
-		this.keyTagMap = keyTagMap;
+		VideoEditorController.keyTagMap = keyTagMap;
 	}
 
 	private void initializeButtons() {
@@ -327,7 +337,6 @@ public class VideoEditorController implements Initializable {
 		ButtonForController.initializeButton(this, spot_butt);
 		ButtonForController.initializeButton(this, note_butt);
 		ButtonForController.initializeButton(this, speech_butt);
-		speech_butt.setVisible(false);
 		ButtonForController.initializeButton(this, face_butt);
 		ButtonForController.initializeButton(this, video_butt);
 		ButtonForController.initializeButton(this, marker_butt);
@@ -336,8 +345,10 @@ public class VideoEditorController implements Initializable {
 		ButtonForController.initializeButton(this, poly_butt);
 		ButtonForController.initializeButton(this, oval_butt);
 		ButtonForController.initializeButton(this, line_butt);
-		ButtonForController.initializeButton(this, rec_butt);
+		ButtonForController.initializeButton(this, rect_butt);
 		ButtonForController.initializeButton(this, cir_butt);
+		ButtonForController.initializeButton(this, simple_text_butt);
+		ButtonForController.initializeButton(this, speech_butt);
 
 		// play,pause buttons
 		ButtonForController.initializePlayPauseButton(this, play_butt, mediaPlayerComponent.getMediaPlayer());
@@ -431,7 +442,28 @@ public class VideoEditorController implements Initializable {
 					} else if (abstractComp != null && abstractComp instanceof CircleComp) {
 						baseRectWithScroll = ButtonForController.createDraggableRectangle(abstractComp,
 								event.getSceneX() - 37, event.getSceneY() - 45, baseRectWidth, baseRectHeight);
-						Shape add2dShape = add2dShape(baseRectWithScroll);
+						Shape add2dShape = add2dShapeCircle(baseRectWithScroll);
+						abstractComp.setShape(add2dShape);
+						playerHolder.getChildren().addAll(baseRectWithScroll, add2dShape);
+
+					} else if (abstractComp != null && abstractComp instanceof RectangleComp) {
+						baseRectWithScroll = ButtonForController.createDraggableRectangle(abstractComp,
+								event.getSceneX() - 37, event.getSceneY() - 45, baseRectWidth, baseRectHeight);
+						Shape add2dShape = baseRectWithScroll;
+						abstractComp.setShape(add2dShape);
+						playerHolder.getChildren().addAll(baseRectWithScroll);
+
+					} else if (abstractComp != null && abstractComp instanceof LineComp) {
+						baseRectWithScroll = ButtonForController.createDraggableRectangle(abstractComp,
+								event.getSceneX() - 37, event.getSceneY() - 45, 100, 10);
+						Shape add2dShape = add2dShapeLine(baseRectWithScroll);
+						abstractComp.setShape(add2dShape);
+						playerHolder.getChildren().addAll(baseRectWithScroll, add2dShape);
+
+					} else if (abstractComp != null && abstractComp instanceof TextComp) {
+						baseRectWithScroll = ButtonForController.createDraggableRectangle(abstractComp,
+								event.getSceneX() - 37, event.getSceneY() - 45, baseRectWidth, baseRectHeight);
+						Shape add2dShape = add2dShapeText(baseRectWithScroll);
 						abstractComp.setShape(add2dShape);
 						playerHolder.getChildren().addAll(baseRectWithScroll, add2dShape);
 
@@ -478,6 +510,12 @@ public class VideoEditorController implements Initializable {
 					} else if (text != null && !text.equalsIgnoreCase("")) {
 						if (text.equalsIgnoreCase("Circle")) {
 							comp = new CircleComp();
+						} else if (text.equalsIgnoreCase("Rectangle")) {
+							comp = new RectangleComp();
+						} else if (text.equalsIgnoreCase("Line")) {
+							comp = new LineComp();
+						} else if (text.equalsIgnoreCase("Text")) {
+							comp = new TextComp();
 						}
 					}
 
@@ -609,7 +647,7 @@ public class VideoEditorController implements Initializable {
 
 			}
 
-			private Shape add2dShape(Rectangle rect) {
+			private Shape add2dShapeCircle(Rectangle rect) {
 				double diameter = Math.min(rect.getHeight(), rect.getWidth());
 				Circle circle = new Circle(diameter / 2);
 				circle.setCenterX(rect.getX() + rect.getWidth() / 2);
@@ -654,6 +692,81 @@ public class VideoEditorController implements Initializable {
 				});
 
 				return circle;
+			}
+
+			private Shape add2dShapeLine(BoundedRectangle rect) {
+
+				Line line = new Line();
+				line.setStartX(rect.getX());
+				line.setStartY(rect.getY() - 2);
+				line.setEndX(rect.getX() + rect.getWidth());
+				line.setEndY(rect.getY() - 2);
+				line.setStrokeWidth(rect.getHeight() - 4);
+				line.setStroke(
+						new Color(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue(), 50 * 0.01));
+
+				rect.xProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					line.setStartX(rect.getX());
+					line.setStartY(rect.getY() - 2);
+					line.setEndX(rect.getX() + rect.getWidth());
+					line.setEndY(rect.getY() - 2);
+				});
+
+				rect.yProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					line.setStartX(rect.getX());
+					line.setStartY(rect.getY() - 2);
+					line.setEndX(rect.getX() + rect.getWidth());
+					line.setEndY(rect.getY() - 2);
+				});
+
+				rect.widthProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					Double width = (Double) newValue;
+					line.setEndX(rect.getX() + width);
+					line.setEndY(rect.getY() - 2);
+				});
+
+				rect.heightProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					Double height = (Double) newValue;
+					line.setStrokeWidth(height - 4);
+				});
+
+				rect.visibleProperty()
+						.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+					Boolean isTrue = (Boolean) newValue;
+					if (!isTrue) {
+						AnchorPane parent = (AnchorPane) line.getParent();
+						parent.getChildren().remove(line);
+					}
+				});
+
+				return line;
+			}
+
+			private Shape add2dShapeText(BoundedRectangle rect) {
+				Text text = new Text();
+				text.setX(rect.getX());
+				text.setY(rect.getY());
+				text.setFont(new Font("Arial", 10));
+
+				rect.xProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					text.setX(rect.getX());
+					text.setY(rect.getY());
+				});
+
+				rect.yProperty().addListener((ChangeListener<? super Number>) (observable, oldValue, newValue) -> {
+					text.setX(rect.getX());
+					text.setY(rect.getY());
+				});
+
+				rect.visibleProperty()
+						.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+					Boolean isTrue = (Boolean) newValue;
+					if (!isTrue) {
+						AnchorPane parent = (AnchorPane) text.getParent();
+						parent.getChildren().remove(text);
+					}
+				});
+				return text;
 			}
 
 			private TextArea addtextArea(Rectangle rect) {
@@ -982,6 +1095,22 @@ public class VideoEditorController implements Initializable {
 
 	public void setCompList(Map<Integer, AbstractComp> compList) {
 		this.compList = compList;
+	}
+
+	public Button getRect_butt() {
+		return rect_butt;
+	}
+
+	public void setRect_butt(Button rect_butt) {
+		this.rect_butt = rect_butt;
+	}
+
+	public Button getSimple_text_butt() {
+		return simple_text_butt;
+	}
+
+	public void setSimple_text_butt(Button simple_text_butt) {
+		this.simple_text_butt = simple_text_butt;
 	}
 
 }

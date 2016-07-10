@@ -211,6 +211,11 @@ public abstract class AbstractComp {
 		System.out.println(toXml());
 	}
 
+	public String getBGFileName() {
+		String[] split = getBgfilepath().split("\\");
+		return split[split.length - 1];
+	}
+
 	/**
 	 * 
 	 * @return the string for storing the component

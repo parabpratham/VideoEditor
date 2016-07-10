@@ -69,4 +69,41 @@ public class VideoTag {
 		keyWordList.add(keyWord);
 	}
 
+	public String toXml() {
+		String tag = "<videotag id=\"" + getSegmentId() + "\">\n" + "<starttime>";
+		tag += getStartTime() + "</starttime>\n";
+		tag += "<endtime> " + getEndTime() + "</endtime>";
+		tag += "<parameters set=\"" + 1 + "\"> \n";
+		tag += "<TagDescription>" + getTagDescription() + "</TagDescription> \n";
+		tag += "<TagKeyWords>" + getKeyWords() + "</TagKeyWords> \n";
+		tag += "</parameters> \n";
+		tag += "</videotag> \n";
+		return tag;
+	}
+
+	private String getKeyWords() {
+		String keywordString = "";
+		for (KeyWord word : getKeyWordList()) {
+			keywordString += word.getId() + ",";
+		}
+		if (keywordString.length() > 0)
+			keywordString = keywordString.substring(0, keywordString.length() - 1);
+		return keywordString;
+	}
+	
+	public String getWords() {
+		String keywordString = "";
+		for (KeyWord word : getKeyWordList()) {
+			keywordString += word.getWord() + ",";
+		}
+		if (keywordString.length() > 0)
+			keywordString = keywordString.substring(0, keywordString.length() - 1);
+		return keywordString;
+	}
+
+	@Override
+	public String toString() {
+		return "Tag" + getSegmentId();
+	}
+
 }

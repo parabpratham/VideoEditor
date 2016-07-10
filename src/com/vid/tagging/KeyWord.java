@@ -44,4 +44,13 @@ public class KeyWord implements Comparable<KeyWord> {
 		return getWord().compareTo(o.getWord());
 	}
 
+	public String toXml() {
+		String keyWords = "<keyword id=\"" + getId() + "\"> \n";
+		keyWords += "<parameters set=\"" + 1 + "\"> \n";
+		keyWords += "<Word>" + getWord() + "</Word> \n";
+		keyWords += "</parameters> \n";
+		keyWords += "</keyword> \n";
+		return keyWords;
+	}
+
 }

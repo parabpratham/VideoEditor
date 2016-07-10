@@ -6,13 +6,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vid.controller.comp.TitleAddController">
+<AnchorPane maxHeight="400.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vid.controller.comp.TextAddController">
    <children>
       <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TabPane maxHeight="350.0" maxWidth="400.0" minHeight="350.0" minWidth="400.0" tabClosingPolicy="UNAVAILABLE" visible="true">
                <tabs>
-                  <Tab fx:id="tab_ann_pro" text="Annotation Property">
+                  <Tab text="Annotation Property">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0">
                            <children>
@@ -20,18 +20,17 @@
                                  <children>
                                     <AnchorPane minHeight="300.0" minWidth="400.0" prefHeight="290.0" prefWidth="400.0">
                                        <children>
-                                          <GridPane fx:id="gridAnno" hgap="5.0" layoutX="65.0" prefHeight="288.0" prefWidth="349.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0">
+                                          <GridPane fx:id="gridAnno" hgap="5.0" layoutX="65.0" prefHeight="288.0" prefWidth="349.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
                                              <rowConstraints>
-                                                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
                                                 <Label prefHeight="17.0" prefWidth="127.0" text="Annotation Type" />
@@ -47,108 +46,46 @@
                                                       </TextField>
                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                   <children>
-                                                      <ColorPicker fx:id="bgcolor" prefHeight="33.0" prefWidth="162.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                                                   </children>
-                                                   <padding>
-                                                      <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                                                   </padding>
-                                                </AnchorPane>
-                                                <Label text="Background Colour" GridPane.rowIndex="1" />
-                                                <Label text="Width" GridPane.rowIndex="2" />
-                                                <Label text="Height" GridPane.rowIndex="3" />
-                                                <AnchorPane prefHeight="33.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                   <children>
-                                                      <TextField fx:id="width" prefHeight="25.0" prefWidth="121.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                   <children>
-                                                      <TextField fx:id="height" prefHeight="25.0" prefWidth="90.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                                                   </children>
-                                                </AnchorPane>
                                                 <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                                                    <children>
                                                       <Slider fx:id="opacity" layoutX="3.0" layoutY="1.0" value="50.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="8.0" />
                                                    </children>
                                                 </AnchorPane>
                                                 <Label text="Opacity" GridPane.rowIndex="4" />
-                                                <Label text="Popup Interval(Sec)" GridPane.rowIndex="5" />
-                                                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                <AnchorPane maxHeight="120.0" maxWidth="320.0" minHeight="120.0" minWidth="320.0" prefHeight="120.0" prefWidth="320.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                    <children>
-                                                      <TextField fx:id="popupinterval" alignment="CENTER" prefHeight="25.0" prefWidth="90.0" promptText="0 For never" text="0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
-                                                         <tooltip>
-                                                            <Tooltip text="The title will reappeat after specified time interval (0 for never)" />
-                                                         </tooltip>
-                                                      </TextField>
+                                                      <TextArea fx:id="textbox" maxHeight="90.0" maxWidth="200.0" minHeight="90.0" minWidth="200.0" prefHeight="90.0" prefWidth="200.0" promptText="Add text here" wrapText="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="15.0" />
                                                    </children>
                                                 </AnchorPane>
-                                             </children>
-                                          </GridPane>
-                                       </children>
-                                       <padding>
-                                          <Insets left="30.0" right="30.0" />
-                                       </padding>
-                                    </AnchorPane>
-                                 </children>
-                                 <padding>
-                                    <Insets top="20.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="tab_text" text="Text Property">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <VBox prefHeight="346.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <AnchorPane>
-                                       <children>
-                                          <Label layoutX="154.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="105.0" prefWidth="379.0">
-                                       <children>
-                                          <TextArea fx:id="textbox" prefHeight="200.0" prefWidth="379.0" promptText="Add text here" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="39.0" prefWidth="400.0">
-                                       <children>
-                                          <HBox prefHeight="35.0" prefWidth="400.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <AnchorPane prefHeight="39.0" prefWidth="215.0">
+                                                <AnchorPane prefHeight="38.0" prefWidth="348.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                                                    <children>
-                                                      <ComboBox fx:id="fonts" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                                                   </children>
-                                                   <padding>
-                                                      <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
-                                                   </padding>
-                                                </AnchorPane>
-                                                <AnchorPane prefHeight="39.0" prefWidth="84.0">
-                                                   <children>
-                                                      <ChoiceBox fx:id="font_size" layoutX="18.0" prefWidth="105.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                                      <HBox prefHeight="35.0" prefWidth="347.0" AnchorPane.rightAnchor="53.0">
+                                                         <children>
+                                                            <AnchorPane prefHeight="35.0" prefWidth="138.0">
+                                                               <padding>
+                                                                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+                                                               </padding>
+                                                               <children>
+                                                                  <ComboBox fx:id="fonts" prefWidth="150.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="4.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="35.0" prefWidth="81.0">
+                                                               <children>
+                                                                  <ChoiceBox fx:id="font_size" layoutX="18.0" prefWidth="105.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane prefHeight="35.0" prefWidth="95.0">
+                                                               <children>
+                                                                  <ColorPicker fx:id="font_colour" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </children>
+                                                      </HBox>
                                                    </children>
                                                 </AnchorPane>
-                                                <AnchorPane prefHeight="39.0" prefWidth="92.0">
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                                                    <children>
-                                                      <ColorPicker fx:id="font_colour" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane>
-                                       <children>
-                                          <HBox prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <AnchorPane prefHeight="45.0" prefWidth="401.0">
-                                                   <children>
-                                                      <ToolBar prefHeight="35.0" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="5.0">
+                                                      <ToolBar prefHeight="35.0" prefWidth="150.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="0.0">
                                                          <items>
                                                             <ToggleButton fx:id="font_bold" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Bold">
                                                                <graphic>
@@ -203,10 +140,16 @@
                                                    </children>
                                                 </AnchorPane>
                                              </children>
-                                          </HBox>
+                                          </GridPane>
                                        </children>
+                                       <padding>
+                                          <Insets left="30.0" right="30.0" />
+                                       </padding>
                                     </AnchorPane>
                                  </children>
+                                 <padding>
+                                    <Insets top="20.0" />
+                                 </padding>
                               </VBox>
                            </children>
                         </AnchorPane>

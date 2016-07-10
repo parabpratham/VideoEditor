@@ -19,8 +19,12 @@ import com.vid.comp.Jcomp.AnnotationMarkers;
 import com.vid.comp.Jcomp.FaceMarker;
 import com.vid.comp.Jcomp.Note;
 import com.vid.comp.Jcomp.SpotLight;
+import com.vid.comp.Jcomp.StaticComponent;
 import com.vid.comp.Jcomp.Title;
 import com.vid.comp.Scomp.CircleComp;
+import com.vid.comp.Scomp.LineComp;
+import com.vid.comp.Scomp.RectangleComp;
+import com.vid.comp.Scomp.TextComp;
 import com.vid.overlay.comp.master.SHAPE_TYPE;
 import com.vid.tagging.KeyWord;
 import com.vid.tagging.VideoTag;
@@ -49,8 +53,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -76,7 +83,7 @@ public class AnnotationPropertyWindow {
 			controller.setComp(abstractComp);
 			controller.getAnntype().setText(abstractComp.getAnnName());
 
-			if (abstractComp.isTextIncluded()) {
+			if (abstractComp instanceof Title || abstractComp instanceof Note) {
 				setupTextPropertiesForTextBox(vController, abstractComp, controller);
 			} else if (abstractComp instanceof SpotLight) {
 				setupTextPropertiesInfoOverlay(vController, abstractComp, controller);
@@ -86,7 +93,7 @@ public class AnnotationPropertyWindow {
 				// set propertirs
 				// setupFaceMarkerProperties(vController, abstractComp,
 				// controller);
-			} else if (abstractComp instanceof CircleComp) {
+			} else if (abstractComp instanceof StaticComponent) {
 				setupShapeProperties(vController, abstractComp, controller);
 			}
 
@@ -119,7 +126,7 @@ public class AnnotationPropertyWindow {
 							}
 
 						} catch (Exception e) {
-
+								e.printStackTrace();
 						}
 					}
 				});
@@ -162,6 +169,8 @@ public class AnnotationPropertyWindow {
 			}
 
 			if (abstractComp instanceof SpotLight) {
+
+				changeOpacity(controller, abstractComp, 50);
 
 				controller.getBgcolor().valueProperty()
 						.addListener((observable, oldValue, newValue) -> changeSpotlightBG(abstractComp, newValue,
@@ -254,6 +263,7 @@ public class AnnotationPropertyWindow {
 					vController.getEndtimeSlider().setVisible(false);
 
 					vController.getTimeSlider().setVisible(true);
+					vController.getTimeLabel().setVisible(true);
 				}
 			});
 
@@ -287,6 +297,10 @@ public class AnnotationPropertyWindow {
 					}
 					vController.getEndtimeLabel().setVisible(false);
 					vController.getEndtimeSlider().setVisible(false);
+
+					vController.getTimeSlider().setVisible(true);
+					vController.getTimeLabel().setVisible(true);
+
 				}
 
 			});
@@ -322,7 +336,8 @@ public class AnnotationPropertyWindow {
 
 						}
 
-						if (vController.getTimeSlider().getValue() == vController.getEndtimeSlider().getValue()) {
+						if (!(controller.getComp() instanceof Title) && vController.getTimeSlider()
+								.getValue() == vController.getEndtimeSlider().getValue()) {
 							Alert alert = new Alert(AlertType.ERROR);
 							// alert.setTitle(titleTxt);
 							alert.setHeaderText("Information Alert");
@@ -361,6 +376,10 @@ public class AnnotationPropertyWindow {
 
 					vController.getEndtimeLabel().setVisible(false);
 					vController.getEndtimeSlider().setVisible(false);
+
+					vController.getTimeSlider().setVisible(true);
+					vController.getTimeLabel().setVisible(true);
+
 				}
 
 				private void setComponent(AbstractAddController controller, Rectangle rect) {
@@ -395,8 +414,8 @@ public class AnnotationPropertyWindow {
 								"" + controller.getFont_size().getValue(), controller.getFont_bold().isSelected(),
 								controller.getFont_I().isSelected(), controller.getFont_strikeout().isSelected(),
 								controller.getFont_U().isSelected());
-						title.setBackgroundOptions(toRgbStringa(controller.getBgcolor().getValue(),
-								controller.getOpacity().getValue() * .01));
+						title.setBackgroundOptions(
+								toRgbStringa(controller.getBgcolor().getValue(), controller.getOpacity().getValue()));
 						title.setPopupinterval(Integer.parseInt(controller.getPopupinterval().getText()));
 					} else if (controller.getComp() != null && controller.getComp() instanceof SpotLight) {
 						SpotLight spotLight = (SpotLight) controller.getComp();
@@ -408,8 +427,8 @@ public class AnnotationPropertyWindow {
 								"" + controller.getFont_size().getValue(), controller.getFont_bold().isSelected(),
 								controller.getFont_I().isSelected(), controller.getFont_strikeout().isSelected(),
 								controller.getFont_U().isSelected());
-						spotLight.setBgColor(toRgbString(controller.getBgcolor().getValue()) + ","
-								+ controller.getOpacity().getValue() * .01);
+						spotLight.setBgColor(
+								toRgbStringa(controller.getBgcolor().getValue(), controller.getOpacity().getValue()));
 						spotLight.setBackgroundOptions(
 								toRgbStringa(controller.getBgcolor().getValue(), controller.getOpacity().getValue()));
 						spotLight.setBgfilepath(controller.getBgfilepath().getText());
@@ -442,12 +461,41 @@ public class AnnotationPropertyWindow {
 						// For circle height and width are same
 						Double radius = Double.parseDouble("" + rect.getHeight()) / 2;
 						circleComp.setCenterX(Double.parseDouble("" + rect.getX()) + radius);
-						circleComp.setCenterX(Double.parseDouble("" + rect.getX()) + radius);
+						circleComp.setCenterY(Double.parseDouble("" + rect.getY()) + radius);
 						circleComp.setRadius(radius);
 						circleComp.setFillShape(controller.getFillShape().isSelected());
-						circleComp.setBgColor(toRgbString(controller.getBgcolor().getValue()) + ","
-								+ controller.getOpacity().getValue() * .01);
+						circleComp.setBgColor(
+								toRgbStringa(controller.getBgcolor().getValue(), controller.getOpacity().getValue()));
+					} else if (controller.getComp() != null && controller.getComp() instanceof RectangleComp) {
+						RectangleComp rectComp = (RectangleComp) controller.getComp();
+						rectComp.setStartX(rect.getX());
+						rectComp.setStartY(rect.getY());
+						rectComp.setWidth(rect.getWidth());
+						rectComp.setHeight(rect.getHeight());
+						rectComp.setFillShape(controller.getFillShape().isSelected());
+						rectComp.setBgColor(
+								toRgbStringa(controller.getBgcolor().getValue(), controller.getOpacity().getValue()));
+					} else if (controller.getComp() != null && controller.getComp() instanceof LineComp) {
+						LineComp lineComp = (LineComp) controller.getComp();
+						lineComp.setStartX(rect.getX());
+						lineComp.setStartY(rect.getY() - 2);
+						lineComp.setLength(rect.getWidth());
+						lineComp.setHeight(rect.getHeight() - 4);
+						lineComp.setFillShape(controller.getFillShape().isSelected());
+						lineComp.setBgColor(
+								toRgbStringa(controller.getBgcolor().getValue(), controller.getOpacity().getValue()));
+					} else if (controller.getComp() != null && controller.getComp() instanceof TextComp) {
+						TextComp text = (TextComp) controller.getComp();
+						text.setStartX(rect.getX());
+						text.setStartY(rect.getY());
+						text.setTextOptions(controller.getTextbox().getText(),
+								toRgbStringa(controller.getFont_colour().getValue(),
+										controller.getOpacity().getValue()),
+								controller.getFont().getFamily(), "" + controller.getFont_size().getValue(),
+								controller.getFont_bold().isSelected(), controller.getFont_I().isSelected(),
+								controller.getFont_strikeout().isSelected(), controller.getFont_U().isSelected());
 					}
+
 					vController.getCompList().put(vController.getIndex() + 1, controller.getComp());
 					vController.setIndex(vController.getIndex() + 1);
 					vController.getListItems().add(controller.getComp());
@@ -468,6 +516,9 @@ public class AnnotationPropertyWindow {
 
 	private static void setupShapeProperties(VideoEditorController vController, AbstractComp abstractComp,
 			AbstractAddController controller) {
+
+		abstractComp.getShape()
+				.setFill(new Color(Color.WHITE.getRed(), Color.WHITE.getGreen(), Color.WHITE.getBlue(), 50 * 0.01));
 
 		if (abstractComp.getShapeType() == SHAPE_TYPE.CIRCLE) {
 
@@ -493,7 +544,143 @@ public class AnnotationPropertyWindow {
 				controller.getHeight().setText("" + newValue);
 			});
 
+		} else if (abstractComp.getShapeType() == SHAPE_TYPE.RECTANGLE) {
+
+			if (controller.getOpacity() != null) {
+				controller.getOpacity().valueProperty().addListener((observable, oldColor, newalpha) -> {
+					Color color = controller.getBgcolor().getValue();
+					abstractComp.getShape().setFill(
+							new Color(color.getRed(), color.getGreen(), color.getBlue(), (double) newalpha * 0.01));
+				});
+			}
+
+			if (controller.getBgcolor() != null) {
+				controller.getBgcolor().valueProperty()
+						.addListener((observable, oldValue, newValue) -> abstractComp.getShape()
+								.setFill(new Color(newValue.getRed(), newValue.getGreen(), newValue.getBlue(),
+										controller.getOpacity().getValue() * 0.01)));
+			}
+
+			Rectangle rectangle = (Rectangle) abstractComp.getShape();
+			rectangle.widthProperty().addListener((observable, oldValue, newValue) -> {
+				// System.out.println("controller.getWidth().setText");
+				controller.getWidth().setText("" + newValue);
+			});
+			rectangle.heightProperty().addListener((observable, oldValue, newValue) -> {
+				// System.out.println("controller.getWidth().setText");
+				controller.getHeight().setText("" + newValue);
+			});
+
+		} else if (abstractComp.getShapeType() == SHAPE_TYPE.LINE) {
+
+			Line line = (Line) abstractComp.getShape();
+			controller.getWidth().setText("" + (line.getEndY() - line.getStartX()));
+			controller.getHeight().setText("" + line.getStrokeWidth());
+
+			if (controller.getOpacity() != null) {
+				controller.getOpacity().valueProperty().addListener((observable, oldColor, newalpha) -> {
+					Color color = controller.getBgcolor().getValue();
+					line.setStroke(
+							new Color(color.getRed(), color.getGreen(), color.getBlue(), (double) newalpha * 0.01));
+				});
+			}
+
+			if (controller.getBgcolor() != null) {
+				controller.getBgcolor().valueProperty()
+						.addListener((observable, oldValue, newValue) -> line.setStroke(new Color(newValue.getRed(),
+								newValue.getGreen(), newValue.getBlue(), controller.getOpacity().getValue() * 0.01)));
+			}
+
+			line.endXProperty().addListener((observable, oldValue, newValue) -> {
+				// System.out.println("controller.getWidth().setText");
+				controller.getWidth().setText("" + ((double) newValue - line.getStartX()));
+			});
+
+			line.startXProperty().addListener((observable, oldValue, newValue) -> {
+				// System.out.println("controller.getWidth().setText");
+				controller.getWidth().setText("" + (line.getEndX() - (double) newValue));
+			});
+
+			line.strokeWidthProperty().addListener((observable, oldValue, newValue) -> {
+				// System.out.println("controller.getWidth().setText");
+				controller.getHeight().setText("" + newValue);
+			});
+		} else if (abstractComp.getShapeType() == SHAPE_TYPE.TEXT) {
+			Text text = (Text) abstractComp.getShape();
+			controller.getFont_size().setValue(10);
+			controller.getFonts().getSelectionModel().select(0);
+
+			if (text != null && controller.getFont_strikeout() != null)
+				text.setStrikethrough(controller.getFont_strikeout().isSelected());
+			if (text != null && controller.getFont_U() != null)
+				text.setUnderline(controller.getFont_U().isSelected());
+
+			controller.getTextbox().textProperty().addListener((observable, oldText, newText) -> {
+				text.setText(newText);
+			});
+
+			controller.getFonts().valueProperty()
+					.addListener((ChangeListener<? super String>) (observable, oldValue, newValue) -> {
+						setTextProperties(controller, text);
+					});
+
+			controller.getFont_colour().valueProperty()
+					.addListener((observable, oldColor, newColor) -> text.setFill(new Color(newColor.getRed(),
+							newColor.getGreen(), newColor.getBlue(), controller.getOpacity().getValue() * .01)));
+
+			controller.getOpacity().valueProperty().addListener((observable, oldVal, newVal) -> {
+				Color newColor = controller.getFont_colour().getValue();
+				text.setFill(
+						new Color(newColor.getRed(), newColor.getGreen(), newColor.getBlue(), (double) newVal * .01));
+			}); // End
+
+			controller.getFont_size().valueProperty()
+					.addListener((ChangeListener<? super Integer>) (observable, oldValue, newValue) -> {
+						setTextProperties(controller, text);
+					});
+
+			// Font styling controls
+			controller.getFont_bold().selectedProperty()
+					.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+						setTextProperties(controller, text);
+					});
+
+			controller.getFont_I().selectedProperty()
+					.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+						setTextProperties(controller, text);
+					});
+
+			controller.getFont_U().selectedProperty()
+					.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+						setTextProperties(controller, text);
+					});
+
+			controller.getFont_strikeout().selectedProperty()
+					.addListener((ChangeListener<? super Boolean>) (observable, oldValue, newValue) -> {
+						setTextProperties(controller, text);
+					});
+
 		}
+
+	}
+
+	private static void setTextProperties(AbstractAddController controller, Text text) {
+
+		String val = text.getText();
+		FontWeight weight = FontWeight.NORMAL;
+		if (controller.getFont_bold().isSelected())
+			weight = FontWeight.BOLD;
+		FontPosture posture = FontPosture.REGULAR;
+		if (controller.getFont_I().isSelected())
+			posture = FontPosture.ITALIC;
+		Font font = Font.font(controller.getFonts().getSelectionModel().getSelectedItem(), weight, posture,
+				controller.getFont_size().getSelectionModel().getSelectedItem());
+
+		text.setFont(font);
+		//System.out.println(font);
+		text.setUnderline(controller.getFont_U().isSelected());
+		text.setStrikethrough(controller.getFont_strikeout().isSelected());
+		text.setText(val);
 	}
 
 	private static void changeOpacity(AbstractAddController controller, AbstractComp abstractComp, Number newalpha) {
@@ -538,6 +725,11 @@ public class AnnotationPropertyWindow {
 
 	private static void setTextAreaProperties(AbstractAddController controller, TextArea ta) {
 		ta.setFont(new Font("Arial", 10));
+
+		controller.getFont_size().setValue(10);
+		controller.getFonts().getSelectionModel().select(0);
+
+		setCSSProperties(ta, controller);
 
 		// Text panel
 		// Bind the text in the text area with user defined
@@ -595,35 +787,33 @@ public class AnnotationPropertyWindow {
 				// end text panel
 
 		// align boxes
-		controller.getLeftalign().setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				setCSSProperties(ta, controller, TextAlignment.LEFT);
-			}
-
-		});
-		controller.getRightalign().setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				setCSSProperties(ta, controller, TextAlignment.RIGHT);
-			}
-
-		});
-		controller.getJestifyalign().setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				setCSSProperties(ta, controller, TextAlignment.JUSTIFY);
-			}
-
-		});
-		controller.getCenteralign().setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				setCSSProperties(ta, controller, TextAlignment.CENTER);
-			}
-
-		});
-	}
+		/*
+		 * controller.getLeftalign().setOnMouseClicked(new
+		 * EventHandler<MouseEvent>() {
+		 * 
+		 * @Override public void handle(MouseEvent event) { setCSSProperties(ta,
+		 * controller, TextAlignment.LEFT); }
+		 * 
+		 * }); controller.getRightalign().setOnMouseClicked(new
+		 * EventHandler<MouseEvent>() {
+		 * 
+		 * @Override public void handle(MouseEvent event) { setCSSProperties(ta,
+		 * controller, TextAlignment.RIGHT); }
+		 * 
+		 * }); controller.getJestifyalign().setOnMouseClicked(new
+		 * EventHandler<MouseEvent>() {
+		 * 
+		 * @Override public void handle(MouseEvent event) { setCSSProperties(ta,
+		 * controller, TextAlignment.JUSTIFY); }
+		 * 
+		 * }); controller.getCenteralign().setOnMouseClicked(new
+		 * EventHandler<MouseEvent>() {
+		 * 
+		 * @Override public void handle(MouseEvent event) { setCSSProperties(ta,
+		 * controller, TextAlignment.CENTER); }
+		 * 
+		 * });
+		 */ }
 
 	private static void setupTextPropertiesForMarker(VideoEditorController vController, AbstractComp abstractComp,
 			AbstractAddController controller) {
@@ -720,6 +910,9 @@ public class AnnotationPropertyWindow {
 			AbstractAddController controller) {
 		InfoOverlay infoOverlay = abstractComp.getInfoOverlay();
 
+		infoOverlay.textProperty().bind(controller.getTextbox().textProperty());
+		infoOverlay.setStyle("-fx-text-fill: " + toRgbString(Color.BLACK) + ";");
+
 		/*
 		 * ObjectProperty<Background> background =
 		 * infoOverlay.backgroundProperty();
@@ -731,8 +924,6 @@ public class AnnotationPropertyWindow {
 		 * controller.getBgcolor().valueProperty(),
 		 * controller.getOpacity().valueProperty()));
 		 */
-
-		infoOverlay.textProperty().bind(controller.getTextbox().textProperty());
 
 		controller.getFont_colour().valueProperty().addListener((observable, oldColor, newColor) -> infoOverlay
 				.setStyle("-fx-text-fill: " + toRgbString(newColor) + ";"));
@@ -815,21 +1006,27 @@ public class AnnotationPropertyWindow {
 
 			// SetBackground
 			Region region = (Region) ta.lookup(".content");
-			region.setStyle("-fx-background-color: " + toRgbStringa(controller.getBgcolor().getValue(),
-					(double) controller.getOpacity().getValue() / 100) + ";");
+			if (region != null)
+				region.setStyle("-fx-background-color: " + toRgbStringa(controller.getBgcolor().getValue(),
+						(double) controller.getOpacity().getValue() / 100) + ";");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		try {
-
 			// SetFontProperties
+			ta.setStyle("-fx-text-fill: " + toRgbString(controller.getFont_colour().getValue()) + ";");
+
 			text = (Text) ta.lookup(".text");
-			text.setUnderline(controller.getFont_U().isSelected());
-			text.setStrikethrough(controller.getFont_strikeout().isSelected());
+			if (text != null && controller.getFont_U() != null)
+				text.setUnderline(controller.getFont_U().isSelected());
+			if (text != null && controller.getFont_strikeout() != null)
+				text.setStrikethrough(controller.getFont_strikeout().isSelected());
 			Text text2 = (Text) controller.getTextbox().lookup(".text");
-			text2.setUnderline(controller.getFont_U().isSelected());
-			text2.setStrikethrough(controller.getFont_strikeout().isSelected());
+			if (text2 != null && controller.getFont_U() != null)
+				text2.setUnderline(controller.getFont_U().isSelected());
+			if (text2 != null && controller.getFont_strikeout() != null)
+				text2.setStrikethrough(controller.getFont_strikeout().isSelected());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -910,6 +1107,18 @@ public class AnnotationPropertyWindow {
 							return;
 						}
 
+						if (controller.getDescription_text().getText() == null
+								|| controller.getDescription_text().getText().length() > 200) {
+							Alert alert = new Alert(AlertType.ERROR);
+							// alert.setTitle(titleTxt);
+							alert.setHeaderText("Information Alert");
+							String s = "Description length exceeds max value(200)";
+							alert.setContentText(s);
+							alert.show();
+
+							return;
+						}
+
 						if (controller.getKeyword_text().getText() == null
 								|| controller.getKeyword_text().getText().equalsIgnoreCase("")) {
 							Alert alert = new Alert(AlertType.ERROR);
@@ -954,17 +1163,30 @@ public class AnnotationPropertyWindow {
 								id = index++;
 								newWord = new KeyWord(keyword);
 								newWord.setId(id);
-								controller.getTag().addKeyWord(newWord);
 								listWords.add(newWord);
 							}
+							controller.getTag().addKeyWord(newWord);
+							System.out.println(newWord.toXml());
 
-							List<VideoTag> tagsList = vController.getKeyTagMap().get(keyword);
+							List<VideoTag> tagsList = VideoEditorController.getKeyTagMap().get(keyword);
 							if (tagsList == null) {
 								tagsList = new ArrayList<>();
 							}
 							tagsList.add(controller.getTag());
-							vController.getKeyTagMap().put(keyword, tagsList);
+							VideoEditorController.getKeyTagMap().put(keyword, tagsList);
 						}
+
+						controller.getTag().setTagDescription(controller.getDescription_text().getText());
+						controller.getTag().setSegmentId(vController.getTagSegmentObservableList().size() + 1);
+						Duration duration = new Duration(
+								vController.getMediaPlayerComponent().getMediaPlayer().getLength());
+						int newTime = (int) duration.multiply(vController.getTimeSlider().getValue() / 100.0)
+								.toMillis();
+						controller.getTag().setStartTime(newTime);
+						newTime = (int) duration.multiply(vController.getEndtimeSlider().getValue() / 100.0).toMillis();
+						controller.getTag().setEndTime(newTime);
+
+						System.out.println(controller.getTag().toXml());
 						vController.getTagSegmentObservableList().add(controller.getTag());
 						vController.getTagSegmentListView().refresh();
 						vController.getTagSegmentListView().setItems(null);

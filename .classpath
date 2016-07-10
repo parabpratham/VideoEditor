@@ -12,7 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="I:/eclipse/addon/controlsfx-8.20.9/controlsfx-8.20.9.jar"/>
+	<classpathentry kind="lib" path="I:/eclipse/addon/controlsfx-8.20.9/controlsfx-8.20.9.jar" sourcepath="I:/eclipse/addon/controlsfx-8.20.9/controlsfx-8.20.9-sources.jar"/>
 	<classpathentry kind="lib" path="I:/eclipse/addon/controlsfx-samples-8.40.10.jar"/>
 	<classpathentry kind="lib" path="I:/eclipse/addon/fxsampler-1.0.9.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Jembl"/>

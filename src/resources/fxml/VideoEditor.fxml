@@ -6,13 +6,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0"
-	minWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.vid.controller.VideoEditorController">
+<AnchorPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vid.controller.VideoEditorController">
 	<children>
-		<MenuBar minWidth="-Infinity" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
+		<MenuBar minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<menus>
 				<Menu mnemonicParsing="false" text="File">
 					<items>
@@ -31,72 +27,46 @@
 				</Menu>
 			</menus>
 		</MenuBar>
-		<GridPane maxHeight="768.0" maxWidth="1000.0" minHeight="768.0"
-			minWidth="1000.0" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="20.0">
+		<GridPane maxHeight="768.0" maxWidth="1000.0" minHeight="768.0" minWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="674.0"
-					minWidth="674.0" prefWidth="674.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="506.0"
-					minWidth="10.0" prefWidth="355.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="674.0" minWidth="674.0" prefWidth="674.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="506.0" minWidth="10.0" prefWidth="355.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="450.0" minHeight="450.0"
-					percentHeight="0.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="250.0" minHeight="250.0"
-					prefHeight="250.0" vgrow="SOMETIMES" />
-				<RowConstraints minHeight="10.0" prefHeight="30.0"
-					vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="450.0" minHeight="450.0" percentHeight="0.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="250.0" minHeight="250.0" prefHeight="250.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<AnchorPane fx:id="playerHolder" maxHeight="410.0"
-					maxWidth="610.0" minHeight="410.0" minWidth="610.0">
+				<AnchorPane fx:id="playerHolder" maxHeight="410.0" maxWidth="610.0" minHeight="410.0" minWidth="610.0">
 					<GridPane.margin>
 						<Insets bottom="25.0" left="37.0" right="37.0" top="25.0" />
 					</GridPane.margin>
 				</AnchorPane>
-				<AnchorPane maxHeight="438.0" maxWidth="350.0" minHeight="400.0"
-					minWidth="350.0" prefHeight="438.0" prefWidth="350.0"
-					GridPane.columnIndex="1">
+				<AnchorPane maxHeight="438.0" maxWidth="350.0" minHeight="400.0" minWidth="350.0" prefHeight="438.0" prefWidth="350.0" GridPane.columnIndex="1">
 					<children>
-						<TabPane layoutX="20.0" AnchorPane.bottomAnchor="0.0"
-							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-							AnchorPane.topAnchor="0.0">
+						<TabPane layoutX="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<tabs>
 								<Tab fx:id="addann_tab" text="Add annotation">
 									<content>
-										<VBox maxHeight="400.0" maxWidth="350.0" minHeight="400.0"
-											minWidth="350.0">
+										<VBox maxHeight="400.0" maxWidth="350.0" minHeight="400.0" minWidth="350.0">
 											<children>
-												<AnchorPane maxHeight="25.0" maxWidth="300.0"
-													minHeight="25.0" minWidth="300.0">
+												<AnchorPane maxHeight="25.0" maxWidth="300.0" minHeight="25.0" minWidth="300.0">
 													<children>
-														<Label contentDisplay="CENTER" layoutX="108.0"
-															layoutY="2.0" text="Add components"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="101.0"
-															AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="0.0" />
+														<Label contentDisplay="CENTER" layoutX="108.0" layoutY="2.0" text="Add components" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="0.0" />
 													</children>
 												</AnchorPane>
-												<AnchorPane maxHeight="150.0" maxWidth="300.0"
-													minHeight="150.0" minWidth="300.0">
+												<AnchorPane maxHeight="150.0" maxWidth="300.0" minHeight="150.0" minWidth="300.0">
 													<children>
-														<VBox AnchorPane.bottomAnchor="49.0"
-															AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-															AnchorPane.topAnchor="0.0">
+														<VBox AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 															<children>
-																<ToolBar blendMode="DARKEN" maxHeight="50.0"
-																	maxWidth="300.0" minHeight="50.0" minWidth="300.0">
+																<ToolBar blendMode="DARKEN" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0">
 																	<items>
-																		<Button fx:id="comment_butt" maxHeight="25.0"
-																			maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																			mnemonicParsing="false" text="Title">
+																		<Button fx:id="comment_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Title">
 																			<graphic>
-																				<ImageView id="bold.png" fitHeight="15.0"
-																					fitWidth="15.0" mouseTransparent="true">
+																				<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																					<image>
-																						<Image
-																							url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/TitleComment.png" />
+																						<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/TitleComment.png" />
 																					</image>
 																				</ImageView>
 																			</graphic>
@@ -104,15 +74,11 @@
 																				<Tooltip text="Add title" />
 																			</tooltip>
 																		</Button>
-																		<Button fx:id="spot_butt" maxHeight="25.0"
-																			maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																			mnemonicParsing="false" text="Spotlight">
+																		<Button fx:id="spot_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Spotlight">
 																			<graphic>
-																				<ImageView id="bold.png" fitHeight="15.0"
-																					fitWidth="15.0" mouseTransparent="true">
+																				<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																					<image>
-																						<Image
-																							url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/spot_light.png" />
+																						<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/spot_light.png" />
 																					</image>
 																				</ImageView>
 																			</graphic>
@@ -120,15 +86,11 @@
 																				<Tooltip text="Spot Light" />
 																			</tooltip>
 																		</Button>
-																		<Button fx:id="note_butt" maxHeight="25.0"
-																			maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																			mnemonicParsing="false" text="Note">
+																		<Button fx:id="note_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Note">
 																			<graphic>
-																				<ImageView id="bold.png" fitHeight="15.0"
-																					fitWidth="15.0" mouseTransparent="true">
+																				<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																					<image>
-																						<Image
-																							url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/note.png" />
+																						<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/note.png" />
 																					</image>
 																				</ImageView>
 																			</graphic>
@@ -138,22 +100,16 @@
 																		</Button>
 																	</items>
 																	<padding>
-																		<Insets bottom="15.0" left="15.0" right="15.0"
-																			top="15.0" />
+																		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 																	</padding>
 																</ToolBar>
-																<ToolBar blendMode="DARKEN" maxHeight="50.0"
-																	maxWidth="300.0" minHeight="50.0" minWidth="300.0">
+																<ToolBar blendMode="DARKEN" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0">
 																	<items>
-																		<Button fx:id="face_butt" maxHeight="25.0"
-																			maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																			mnemonicParsing="false" text="FaceTag">
+																		<Button fx:id="face_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="FaceTag">
 																			<graphic>
-																				<ImageView id="bold.png" fitHeight="15.0"
-																					fitWidth="15.0" mouseTransparent="true">
+																				<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																					<image>
-																						<Image
-																							url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/facetag.png" />
+																						<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/facetag.png" />
 																					</image>
 																				</ImageView>
 																			</graphic>
@@ -161,31 +117,11 @@
 																				<Tooltip text="Tag face" />
 																			</tooltip>
 																		</Button>
-																		<Button fx:id="video_butt" maxHeight="25.0"
-																			maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																			mnemonicParsing="false" text="Video">
+																		<Button fx:id="marker_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Marker">
 																			<graphic>
-																				<ImageView id="bold.png" fitHeight="15.0"
-																					fitWidth="15.0" mouseTransparent="true">
+																				<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																					<image>
-																						<Image
-																							url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/overlay_video.png" />
-																					</image>
-																				</ImageView>
-																			</graphic>
-																			<tooltip>
-																				<Tooltip text="Overlay video" />
-																			</tooltip>
-																		</Button>
-																		<Button fx:id="marker_butt" maxHeight="25.0"
-																			maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																			mnemonicParsing="false" text="Marker">
-																			<graphic>
-																				<ImageView id="bold.png" fitHeight="15.0"
-																					fitWidth="15.0" mouseTransparent="true">
-																					<image>
-																						<Image
-																							url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/marker.png" />
+																						<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/marker.png" />
 																					</image>
 																				</ImageView>
 																			</graphic>
@@ -193,69 +129,60 @@
 																				<Tooltip text="Add marker" />
 																			</tooltip>
 																		</Button>
+            														<Button fx:id="speech_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Speech">
+            															<graphic>
+            																<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+            																	<image>
+            																		<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/speech.png" />
+            																	</image>
+            																</ImageView>
+            															</graphic>
+            															<tooltip>
+            																<Tooltip text="Speech Bubble" />
+            															</tooltip>
+            														</Button>
 																	</items>
 																	<padding>
-																		<Insets bottom="15.0" left="15.0" right="15.0"
-																			top="15.0" />
+																		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 																	</padding>
 																</ToolBar>
+																		<Button fx:id="video_butt" disable="true" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Video" visible="false">
+																			<graphic>
+																				<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+																					<image>
+																						<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/overlay_video.png" />
+																					</image>
+																				</ImageView>
+																			</graphic>
+																			<tooltip>
+																				<Tooltip text="Overlay video" />
+																			</tooltip>
+																		</Button>
 															</children>
 														</VBox>
-														<Button fx:id="speech_butt" layoutX="122.0"
-															layoutY="104.0" maxHeight="25.0" maxWidth="90.0"
-															minHeight="25.0" minWidth="90.0" mnemonicParsing="false"
-															text="Speech" AnchorPane.bottomAnchor="21.0"
-															AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="105.0"
-															AnchorPane.topAnchor="104.0">
-															<graphic>
-																<ImageView id="bold.png" fitHeight="15.0"
-																	fitWidth="15.0" mouseTransparent="true">
-																	<image>
-																		<Image
-																			url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/speech.png" />
-																	</image>
-																</ImageView>
-															</graphic>
-															<tooltip>
-																<Tooltip text="Speech Bubble" />
-															</tooltip>
-														</Button>
 													</children>
 												</AnchorPane>
-												<AnchorPane maxHeight="35.0" maxWidth="300.0"
-													minHeight="35.0" minWidth="300.0">
+												<AnchorPane maxHeight="35.0" maxWidth="300.0" minHeight="35.0" minWidth="300.0">
 													<children>
-														<Label layoutX="111.0" text="Add shapes"
-															AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="119.0"
-															AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="0.0" />
+														<Label layoutX="111.0" text="Add shapes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="119.0" AnchorPane.rightAnchor="119.0" AnchorPane.topAnchor="0.0" />
 													</children>
 												</AnchorPane>
 												<AnchorPane>
 													<children>
-														<VBox AnchorPane.bottomAnchor="0.0"
-															AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-															AnchorPane.topAnchor="0.0">
+														<VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 															<children>
 																<VBox prefHeight="52.0" prefWidth="379.0">
 																	<children>
 																		<AnchorPane maxWidth="300.0" minWidth="300.0" />
 																		<AnchorPane prefWidth="329.0">
 																			<children>
-																				<ToolBar blendMode="DARKEN" maxHeight="50.0"
-																					maxWidth="300.0" minHeight="50.0" minWidth="300.0"
-																					AnchorPane.bottomAnchor="0.0"
-																					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-																					AnchorPane.topAnchor="0.0">
+																				<ToolBar blendMode="DARKEN" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 																					<items>
-																						<Button fx:id="oval_butt" maxHeight="25.0"
-																							maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																							mnemonicParsing="false" text="Circle">
+																						<Button fx:id="cir_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Circle">
 																							<graphic>
-																								<ImageView id="ellipse.png" fitHeight="15.0"
-																									fitWidth="15.0" mouseTransparent="true">
+																								<ImageView id="ellipse.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																									<image>
-																										<Image
-																											url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/ellipse.png" />
+																										<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/circle95.png" />
 																									</image>
 																								</ImageView>
 																							</graphic>
@@ -263,16 +190,11 @@
 																								<Tooltip text="Circle" />
 																							</tooltip>
 																						</Button>
-																						<Button fx:id="poly_butt" maxHeight="25.0"
-																							maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																							mnemonicParsing="false" text="Polygon">
+																						<Button fx:id="poly_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Polygon">
 																							<graphic>
-																								<ImageView id="polygonal43.png"
-																									fitHeight="15.0" fitWidth="15.0"
-																									mouseTransparent="true">
+																								<ImageView id="polygonal43.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																									<image>
-																										<Image
-																											url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/polygonal43.png" />
+																										<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/polygonal43.png" />
 																									</image>
 																								</ImageView>
 																							</graphic>
@@ -280,48 +202,11 @@
 																								<Tooltip text="Polygon" />
 																							</tooltip>
 																						</Button>
-																					</items>
-																					<padding>
-																						<Insets bottom="15.0" left="15.0" right="15.0"
-																							top="15.0" />
-																					</padding>
-																				</ToolBar>
-																			</children>
-																		</AnchorPane>
-																		<AnchorPane prefWidth="329.0">
-																			<children>
-																				<ToolBar blendMode="DARKEN" maxHeight="50.0"
-																					maxWidth="300.0" minHeight="50.0" minWidth="300.0"
-																					AnchorPane.bottomAnchor="0.0"
-																					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-																					AnchorPane.topAnchor="0.0">
-																					<items>
-																						<Button fx:id="line_butt" maxHeight="25.0"
-																							maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																							mnemonicParsing="false" text="Line">
+																						<Button fx:id="rect_butt" maxHeight="25.0" maxWidth="95.0" minWidth="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Rectangle">
 																							<graphic>
-																								<ImageView id="line.png" fitHeight="15.0"
-																									fitWidth="15.0" mouseTransparent="true">
+																								<ImageView id="rectangular43.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																									<image>
-																										<Image
-																											url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/line.png" />
-																									</image>
-																								</ImageView>
-																							</graphic>
-																							<tooltip>
-																								<Tooltip text="Add line" />
-																							</tooltip>
-																						</Button>
-																						<Button fx:id="rec_butt" maxHeight="25.0"
-																							maxWidth="90.0" minWidth="90.0" mnemonicParsing="false"
-																							text="Rectangle">
-																							<graphic>
-																								<ImageView id="rectangular43.png"
-																									fitHeight="15.0" fitWidth="15.0"
-																									mouseTransparent="true">
-																									<image>
-																										<Image
-																											url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/rectangular43.png" />
+																										<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/rectangular43.png" />
 																									</image>
 																								</ImageView>
 																							</graphic>
@@ -329,16 +214,34 @@
 																								<Tooltip text="Add Rectangular" />
 																							</tooltip>
 																						</Button>
-																						<Button fx:id="cir_butt" maxHeight="25.0"
-																							maxWidth="90.0" minHeight="25.0" minWidth="90.0"
-																							mnemonicParsing="false" text="Circle">
+																					</items>
+																					<padding>
+																						<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+																					</padding>
+																				</ToolBar>
+																			</children>
+																		</AnchorPane>
+																		<AnchorPane prefWidth="329.0">
+																			<children>
+																				<ToolBar blendMode="DARKEN" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+																					<items>
+																						<Button fx:id="line_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Line">
 																							<graphic>
-																								<ImageView id="circle95.png"
-																									fitHeight="15.0" fitWidth="15.0"
-																									mouseTransparent="true">
+																								<ImageView id="line.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																									<image>
-																										<Image
-																											url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/circle95.png" />
+																										<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/line.png" />
+																									</image>
+																								</ImageView>
+																							</graphic>
+																							<tooltip>
+																								<Tooltip text="Add line" />
+																							</tooltip>
+																						</Button>
+																						<Button fx:id="oval_butt" maxHeight="25.0" maxWidth="90.0" minHeight="25.0" minWidth="90.0" mnemonicParsing="false" text="Circle">
+																							<graphic>
+																								<ImageView id="circle95.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+																									<image>
+																										<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/circle95.png" />
 																									</image>
 																								</ImageView>
 																							</graphic>
@@ -346,75 +249,25 @@
 																								<Tooltip text="Add circle" />
 																							</tooltip>
 																						</Button>
+      																				<Button fx:id="simple_text_butt" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" text="Text">
+      																					<graphic>
+      																						<ImageView id="bold.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+      																							<image>
+      																								<Image url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/Text.png" />
+      																							</image>
+      																						</ImageView>
+      																					</graphic>
+      																					<tooltip>
+      																						<Tooltip text="Add Text" />
+      																					</tooltip>
+      																				</Button>
 																					</items>
 																					<padding>
-																						<Insets bottom="15.0" left="15.0" right="15.0"
-																							top="15.0" />
+																						<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 																					</padding>
 																				</ToolBar>
 																			</children>
 																		</AnchorPane>
-																	</children>
-																</VBox>
-																<VBox prefHeight="52.0" prefWidth="379.0">
-																	<children>
-																		<AnchorPane>
-																			<children>
-																				<Label layoutX="168.0" prefHeight="17.0"
-																					prefWidth="44.0" text="Overlay"
-																					AnchorPane.bottomAnchor="0.0"
-																					AnchorPane.leftAnchor="128.0"
-																					AnchorPane.rightAnchor="128.0"
-																					AnchorPane.topAnchor="0.0" />
-																			</children>
-																		</AnchorPane>
-																		<ToolBar blendMode="DARKEN" maxWidth="300.0"
-																			minWidth="300.0">
-																			<items>
-																				<Button mnemonicParsing="false" text="Text">
-																					<graphic>
-																						<ImageView id="bold.png" fitHeight="15.0"
-																							fitWidth="15.0" mouseTransparent="true">
-																							<image>
-																								<Image
-																									url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/Text.png" />
-																							</image>
-																						</ImageView>
-																					</graphic>
-																					<tooltip>
-																						<Tooltip text="Speech Bubble" />
-																					</tooltip>
-																				</Button>
-																				<Button mnemonicParsing="false" text="Images">
-																					<graphic>
-																						<ImageView id="bold.png" fitHeight="15.0"
-																							fitWidth="15.0" mouseTransparent="true">
-																							<image>
-																								<Image
-																									url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/photos9.png" />
-																							</image>
-																						</ImageView>
-																					</graphic>
-																					<tooltip>
-																						<Tooltip text="Speech Bubble" />
-																					</tooltip>
-																				</Button>
-																				<Button mnemonicParsing="false">
-																					<graphic>
-																						<ImageView id="bold.png" fitHeight="15.0"
-																							fitWidth="15.0" mouseTransparent="true">
-																							<image>
-																								<Image
-																									url="@../../../../../JavaFX/Tutorial/src/application/overlay/view/img/speech.png" />
-																							</image>
-																						</ImageView>
-																					</graphic>
-																					<tooltip>
-																						<Tooltip text="Speech Bubble" />
-																					</tooltip>
-																				</Button>
-																			</items>
-																		</ToolBar>
 																	</children>
 																</VBox>
 																<VBox prefHeight="52.0" prefWidth="379.0" />
@@ -431,88 +284,44 @@
 								</Tab>
 								<Tab fx:id="taginfo_tab" closable="false" text="Tag Info">
 									<content>
-										<AnchorPane maxHeight="400.0" maxWidth="350.0"
-											minHeight="400.0" minWidth="350.0" prefHeight="400.0"
-											prefWidth="350.0">
+										<AnchorPane maxHeight="400.0" maxWidth="350.0" minHeight="400.0" minWidth="350.0" prefHeight="400.0" prefWidth="350.0">
 											<children>
-												<VBox prefHeight="200.0" prefWidth="100.0"
-													AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-													AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+												<VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 													<children>
-														<AnchorPane maxHeight="350.0" maxWidth="350.0"
-															minHeight="350.0" minWidth="350.0" prefHeight="350.0"
-															prefWidth="350.0">
+														<AnchorPane maxHeight="350.0" maxWidth="350.0" minHeight="350.0" minWidth="350.0" prefHeight="350.0" prefWidth="350.0">
 															<children>
-																<HBox prefHeight="100.0" prefWidth="200.0"
-																	AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-																	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+																<HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 																	<children>
-																		<AnchorPane maxHeight="350.0" maxWidth="150.0"
-																			minHeight="350.0" minWidth="150.0" prefHeight="350.0"
-																			prefWidth="150.0">
+																		<AnchorPane maxHeight="350.0" maxWidth="150.0" minHeight="350.0" minWidth="150.0" prefHeight="350.0" prefWidth="150.0">
 																			<children>
-																				<VBox prefHeight="200.0" prefWidth="100.0"
-																					AnchorPane.bottomAnchor="0.0"
-																					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-																					AnchorPane.topAnchor="0.0">
+																				<VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 																					<children>
-																						<AnchorPane maxHeight="30.0" maxWidth="150.0"
-																							minHeight="30.0" minWidth="150.0" prefHeight="30.0"
-																							prefWidth="150.0">
+																						<AnchorPane maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0">
 																							<children>
-																								<Label text="Keywords"
-																									AnchorPane.bottomAnchor="5.0"
-																									AnchorPane.leftAnchor="49.0"
-																									AnchorPane.rightAnchor="49.0"
-																									AnchorPane.topAnchor="5.0" />
+																								<Label text="Keywords" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="5.0" />
 																							</children>
 																						</AnchorPane>
-																						<AnchorPane maxHeight="320.0" maxWidth="150.0"
-																							minHeight="320.0" minWidth="150.0" prefHeight="320.0"
-																							prefWidth="150.0">
+																						<AnchorPane maxHeight="320.0" maxWidth="150.0" minHeight="320.0" minWidth="150.0" prefHeight="320.0" prefWidth="150.0">
 																							<children>
-																								<ListView fx:id="keywordListView" layoutY="28.0"
-																									prefHeight="172.0" prefWidth="156.0"
-																									AnchorPane.bottomAnchor="0.0"
-																									AnchorPane.leftAnchor="0.0"
-																									AnchorPane.rightAnchor="0.0"
-																									AnchorPane.topAnchor="0.0" />
+																								<ListView fx:id="keywordListView" layoutY="28.0" prefHeight="172.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 																							</children>
 																						</AnchorPane>
 																					</children>
 																				</VBox>
 																			</children>
 																		</AnchorPane>
-																		<AnchorPane maxHeight="350.0" maxWidth="150.0"
-																			minHeight="350.0" minWidth="150.0" prefHeight="350.0"
-																			prefWidth="150.0">
+																		<AnchorPane maxHeight="350.0" maxWidth="150.0" minHeight="350.0" minWidth="150.0" prefHeight="350.0" prefWidth="150.0">
 																			<children>
-																				<VBox prefHeight="200.0" prefWidth="100.0"
-																					AnchorPane.bottomAnchor="0.0"
-																					AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-																					AnchorPane.topAnchor="0.0">
+																				<VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 																					<children>
-																						<AnchorPane maxHeight="30.0" maxWidth="150.0"
-																							minHeight="30.0" minWidth="150.0" prefHeight="30.0"
-																							prefWidth="150.0">
+																						<AnchorPane maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="150.0" prefHeight="30.0" prefWidth="150.0">
 																							<children>
-																								<Label text="Segment / Shots "
-																									AnchorPane.bottomAnchor="5.0"
-																									AnchorPane.leftAnchor="29.0"
-																									AnchorPane.rightAnchor="29.0"
-																									AnchorPane.topAnchor="5.0" />
+																								<Label text="Segment / Shots " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="5.0" />
 																							</children>
 																						</AnchorPane>
-																						<AnchorPane maxHeight="320.0" maxWidth="150.0"
-																							minHeight="320.0" minWidth="150.0" prefHeight="320.0"
-																							prefWidth="150.0">
+																						<AnchorPane maxHeight="320.0" maxWidth="150.0" minHeight="320.0" minWidth="150.0" prefHeight="320.0" prefWidth="150.0">
 																							<children>
-																								<ListView fx:id="tagSegmentListView"
-																									layoutY="28.0" prefHeight="172.0" prefWidth="156.0"
-																									AnchorPane.bottomAnchor="0.0"
-																									AnchorPane.leftAnchor="0.0"
-																									AnchorPane.rightAnchor="0.0"
-																									AnchorPane.topAnchor="0.0" />
+																								<ListView fx:id="tagSegmentListView" layoutY="28.0" prefHeight="172.0" prefWidth="156.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 																							</children>
 																						</AnchorPane>
 																					</children>
@@ -529,18 +338,12 @@
 																<Insets left="20.0" right="20.0" />
 															</VBox.margin>
 														</AnchorPane>
-														<AnchorPane maxHeight="50.0" maxWidth="400.0"
-															minHeight="50.0" minWidth="400.0" prefHeight="50.0"
-															prefWidth="400.0">
+														<AnchorPane maxHeight="50.0" maxWidth="400.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="400.0">
 															<children>
-																<ButtonBar prefHeight="40.0" prefWidth="200.0"
-																	AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="67.0"
-																	AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="0.0">
+																<ButtonBar prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="67.0" AnchorPane.topAnchor="0.0">
 																	<buttons>
-																		<Button mnemonicParsing="false" text="Add"
-																			fx:id="addtag_butt" />
-																		<Button mnemonicParsing="false" text="Search"
-																			fx:id="serachtag_butt" />
+																		<Button fx:id="addtag_butt" mnemonicParsing="false" text="Add" />
+																		<Button fx:id="serachtag_butt" mnemonicParsing="false" text="Search" />
 																	</buttons>
 																</ButtonBar>
 															</children>
@@ -558,34 +361,23 @@
 						<Insets />
 					</GridPane.margin>
 				</AnchorPane>
-				<AnchorPane prefHeight="200.0" prefWidth="200.0"
-					GridPane.rowIndex="1">
+				<AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
 					<children>
-						<VBox prefHeight="200.0" prefWidth="100.0"
-							AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<children>
 								<AnchorPane prefHeight="200.0" prefWidth="200.0">
 									<children>
-										<VBox layoutX="-3.0" layoutY="68.0" prefHeight="155.0"
-											prefWidth="674.0" AnchorPane.bottomAnchor="119.0"
-											AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-											AnchorPane.topAnchor="68.0">
+										<VBox layoutX="-3.0" layoutY="68.0" prefHeight="155.0" prefWidth="674.0" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="68.0">
 											<children>
 												<AnchorPane prefHeight="78.0" prefWidth="321.0">
 													<children>
-														<ToolBar prefHeight="43.0" prefWidth="273.0"
-															AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="220.0"
-															AnchorPane.rightAnchor="181.0" AnchorPane.topAnchor="5.0">
+														<ToolBar prefHeight="43.0" prefWidth="273.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="181.0" AnchorPane.topAnchor="5.0">
 															<items>
-																<Button fx:id="rewind_butt" contentDisplay="GRAPHIC_ONLY"
-																	mnemonicParsing="false" text="RE">
+																<Button fx:id="rewind_butt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="RE">
 																	<graphic>
-																		<ImageView id="media_playback_seekback.png"
-																			fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
+																		<ImageView id="media_playback_seekback.png" fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
 																			<image>
-																				<Image
-																					url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_seek_backward.png" />
+																				<Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_seek_backward.png" />
 																			</image>
 																		</ImageView>
 																	</graphic>
@@ -593,14 +385,11 @@
 																		<Tooltip text="Seek_back" />
 																	</tooltip>
 																</Button>
-																<Button fx:id="stop_butt" contentDisplay="GRAPHIC_ONLY"
-																	mnemonicParsing="false" text="ST">
+																<Button fx:id="stop_butt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="ST">
 																	<graphic>
-																		<ImageView id="media_playback_stop.png"
-																			fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
+																		<ImageView id="media_playback_stop.png" fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
 																			<image>
-																				<Image
-																					url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_playback_stop.png" />
+																				<Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_playback_stop.png" />
 																			</image>
 																		</ImageView>
 																	</graphic>
@@ -608,14 +397,11 @@
 																		<Tooltip text="Stop" />
 																	</tooltip>
 																</Button>
-																<Button fx:id="play_butt" contentDisplay="GRAPHIC_ONLY"
-																	mnemonicParsing="false" text="PL">
+																<Button fx:id="play_butt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="PL">
 																	<graphic>
-																		<ImageView id="media_playback_seekback.png"
-																			fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
+																		<ImageView id="media_playback_seekback.png" fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
 																			<image>
-																				<Image
-																					url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_playback_start.png" />
+																				<Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_playback_start.png" />
 																			</image>
 																		</ImageView>
 																	</graphic>
@@ -623,14 +409,11 @@
 																		<Tooltip text="Play" />
 																	</tooltip>
 																</Button>
-																<Button fx:id="fforward_butt" contentDisplay="GRAPHIC_ONLY"
-																	mnemonicParsing="false" text="FO">
+																<Button fx:id="fforward_butt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="FO">
 																	<graphic>
-																		<ImageView id="media_playback_seekfor.png"
-																			fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
+																		<ImageView id="media_playback_seekfor.png" fitHeight="25.0" fitWidth="25.0" mouseTransparent="true">
 																			<image>
-																				<Image
-																					url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_seek_forward.png" />
+																				<Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/media_seek_forward.png" />
 																			</image>
 																		</ImageView>
 																	</graphic>
@@ -638,15 +421,11 @@
 																		<Tooltip text="Seek_forward" />
 																	</tooltip>
 																</Button>
-																<Button fx:id="openvideo_butt" contentDisplay="GRAPHIC_ONLY"
-																	ellipsisString="" mnemonicParsing="false" prefHeight="33.0"
-																	prefWidth="38.0" text="NEW">
+																<Button fx:id="openvideo_butt" contentDisplay="GRAPHIC_ONLY" ellipsisString="" mnemonicParsing="false" prefHeight="33.0" prefWidth="38.0" text="NEW">
 																	<graphic>
-																		<ImageView id="glyphicons-145-folder-open.png"
-																			fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+																		<ImageView id="glyphicons-145-folder-open.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																			<image>
-																				<Image
-																					url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-145-folder-open.png" />
+																				<Image url="@../../../../../JavaFX/VideoPlayer/src/resources/MediaIcons/png/glyphicons-145-folder-open.png" />
 																			</image>
 																		</ImageView>
 																	</graphic>
@@ -654,12 +433,9 @@
 																		<Tooltip text="Open" />
 																	</tooltip>
 																</Button>
-																<Button fx:id="convert_butt" contentDisplay="GRAPHIC_ONLY"
-																	ellipsisString="" mnemonicParsing="false" prefHeight="33.0"
-																	prefWidth="38.0" text="Convert">
+																<Button fx:id="convert_butt" contentDisplay="GRAPHIC_ONLY" ellipsisString="" mnemonicParsing="false" prefHeight="33.0" prefWidth="38.0" text="Convert">
 																	<graphic>
-																		<ImageView id="glyphicons-145-folder-open.png"
-																			fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
+																		<ImageView id="glyphicons-145-folder-open.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
 																			<image>
 																				<Image url="@../icons/glyphicons-152-new-window.png" />
 																			</image>
@@ -673,19 +449,13 @@
 														</ToolBar>
 													</children>
 												</AnchorPane>
-												<AnchorPane fx:id="timelineholder" prefHeight="43.0"
-													prefWidth="674.0">
+												<AnchorPane fx:id="timelineholder" prefHeight="43.0" prefWidth="674.0">
 													<children>
-														<HBox AnchorPane.bottomAnchor="6.0"
-															AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
-															AnchorPane.topAnchor="20.0">
+														<HBox AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 															<children>
 
-																<TextField fx:id="timeLabel" disable="true"
-																	prefHeight="25.0" prefWidth="67.0" promptText="00:00:00"
-																	text="00:00:00" />
-																<Slider fx:id="timeSlider" maxWidth="500.0"
-																	minWidth="500.0" prefHeight="14.0" prefWidth="500.0">
+																<TextField fx:id="timeLabel" disable="true" prefHeight="25.0" prefWidth="67.0" promptText="00:00:00" text="00:00:00" />
+																<Slider fx:id="timeSlider" maxWidth="500.0" minWidth="500.0" prefHeight="14.0" prefWidth="500.0">
 																	<padding>
 																		<Insets top="10.0" />
 																	</padding>
@@ -696,16 +466,10 @@
 												</AnchorPane>
 												<AnchorPane prefHeight="43.0" prefWidth="674.0">
 													<children>
-														<HBox AnchorPane.bottomAnchor="6.0"
-															AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
-															AnchorPane.topAnchor="20.0">
+														<HBox AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 															<children>
-																<TextField fx:id="endtimeLabel" disable="true"
-																	prefHeight="25.0" prefWidth="67.0" promptText="00:00:00"
-																	text="00:00:00" visible="false" />
-																<Slider fx:id="endtimeSlider" maxWidth="500.0"
-																	minWidth="500.0" prefHeight="14.0" prefWidth="500.0"
-																	visible="false">
+																<TextField fx:id="endtimeLabel" disable="true" prefHeight="25.0" prefWidth="67.0" promptText="00:00:00" text="00:00:00" visible="false" />
+																<Slider fx:id="endtimeSlider" maxWidth="500.0" minWidth="500.0" prefHeight="14.0" prefWidth="500.0" visible="false">
 																	<padding>
 																		<Insets top="10.0" />
 																	</padding>
@@ -722,21 +486,16 @@
 						</VBox>
 					</children>
 				</AnchorPane>
-				<AnchorPane prefHeight="200.0" prefWidth="200.0"
-					GridPane.columnIndex="1" GridPane.rowIndex="1">
+				<AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
 					<children>
-						<VBox layoutX="62.0" layoutY="25.0" AnchorPane.bottomAnchor="16.0"
-							AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0"
-							AnchorPane.topAnchor="16.0">
+						<VBox layoutX="62.0" layoutY="25.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="16.0">
 							<children>
-								<Label alignment="CENTER" prefHeight="37.0" prefWidth="292.0"
-									text="Annotation List">
+								<Label alignment="CENTER" prefHeight="37.0" prefWidth="292.0" text="Annotation List">
 									<padding>
 										<Insets bottom="20.0" />
 									</padding>
 								</Label>
-								<ListView fx:id="compListView" prefHeight="200.0"
-									prefWidth="254.0" />
+								<ListView fx:id="compListView" prefHeight="200.0" prefWidth="254.0" />
 							</children>
 						</VBox>
 					</children>

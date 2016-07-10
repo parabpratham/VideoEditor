@@ -7,7 +7,6 @@ import com.vid.controller.AbstractAddController;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
@@ -23,7 +22,6 @@ public class TitleAddController extends AbstractAddController {
 	private ColorPicker bgcolor;
 	@FXML
 	private Slider opacity;
-
 	@FXML
 	private Tab tab_text;
 	@FXML
@@ -35,8 +33,6 @@ public class TitleAddController extends AbstractAddController {
 	@FXML
 	private ColorPicker font_colour;
 	@FXML
-	private ToggleButton wraptext;
-	@FXML
 	private ToggleButton font_bold;
 	@FXML
 	private ToggleButton font_U;
@@ -44,14 +40,6 @@ public class TitleAddController extends AbstractAddController {
 	private ToggleButton font_I;
 	@FXML
 	private ToggleButton font_strikeout;
-	@FXML
-	private Button jestifyalign;
-	@FXML
-	private Button leftalign;
-	@FXML
-	private Button centeralign;
-	@FXML
-	private Button rightalign;
 	@FXML
 	private TextField popupinterval;
 
@@ -102,14 +90,6 @@ public class TitleAddController extends AbstractAddController {
 		this.font_colour = font_colour;
 	}
 
-	public ToggleButton getWraptext() {
-		return wraptext;
-	}
-
-	public void setWraptext(ToggleButton wraptext) {
-		this.wraptext = wraptext;
-	}
-
 	public ToggleButton getFont_bold() {
 		return font_bold;
 	}
@@ -140,38 +120,6 @@ public class TitleAddController extends AbstractAddController {
 
 	public void setFont_strikeout(ToggleButton font_strikeout) {
 		this.font_strikeout = font_strikeout;
-	}
-
-	public Button getJestifyalign() {
-		return jestifyalign;
-	}
-
-	public void setJestifyalign(Button jestifyalign) {
-		this.jestifyalign = jestifyalign;
-	}
-
-	public Button getLeftalign() {
-		return leftalign;
-	}
-
-	public void setLeftalign(Button leftalign) {
-		this.leftalign = leftalign;
-	}
-
-	public Button getCenteralign() {
-		return centeralign;
-	}
-
-	public void setCenteralign(Button centeralign) {
-		this.centeralign = centeralign;
-	}
-
-	public Button getRightalign() {
-		return rightalign;
-	}
-
-	public void setRightalign(Button rightalign) {
-		this.rightalign = rightalign;
 	}
 
 	public ComboBox<String> getFonts() {

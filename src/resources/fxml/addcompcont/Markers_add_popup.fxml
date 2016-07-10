@@ -188,9 +188,9 @@
                                        <children>
                                           <HBox prefHeight="45.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <AnchorPane prefHeight="45.0" prefWidth="214.0">
+                                                <AnchorPane prefHeight="45.0" prefWidth="400.0">
                                                    <children>
-                                                      <ToolBar prefHeight="40.0" prefWidth="168.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+                                                      <ToolBar maxHeight="35.0" maxWidth="190.0" minHeight="35.0" minWidth="152.0" prefHeight="35.0" prefWidth="152.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="123.0" AnchorPane.topAnchor="5.0">
                                                          <items>
                                                             <ToggleButton fx:id="font_bold" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Bold">
                                                                <graphic>
@@ -240,74 +240,6 @@
                                                                   <Tooltip text="Strikeout" />
                                                                </tooltip>
                                                             </ToggleButton>
-                                                            <ToggleButton fx:id="wraptext" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Wrap">
-                                                               <graphic>
-                                                                  <ImageView id="text-wrap.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
-                                                                     <image>
-                                                                        <Image url="@../../icons/glyphicons-107-text-width.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Wrap" />
-                                                               </tooltip>
-                                                            </ToggleButton>
-                                                         </items>
-                                                      </ToolBar>
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane prefHeight="45.0" prefWidth="174.0">
-                                                   <children>
-                                                      <ToolBar layoutX="10.0" prefHeight="45.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                                         <items>
-                                                            <Button fx:id="jestifyalign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Justify">
-                                                               <graphic>
-                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
-                                                                     <image>
-                                                                        <Image url="@../../icons/glyphicons-114-justify.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Justify" />
-                                                               </tooltip>
-                                                            </Button>
-                                                            <Button fx:id="leftalign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Left Align">
-                                                               <graphic>
-                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
-                                                                     <image>
-                                                                        <Image url="@../../icons/glyphicons-111-align-left.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Left Align" />
-                                                               </tooltip>
-                                                            </Button>
-                                                            <Button fx:id="centeralign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Center align">
-                                                               <graphic>
-                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
-                                                                     <image>
-                                                                        <Image url="@../../icons/glyphicons-112-align-center.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Center align" />
-                                                               </tooltip>
-                                                            </Button>
-                                                            <Button fx:id="rightalign" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" text="Right Align">
-                                                               <graphic>
-                                                                  <ImageView id="media_playback_start.png" fitHeight="15.0" fitWidth="15.0" mouseTransparent="true">
-                                                                     <image>
-                                                                        <Image url="@../../icons/glyphicons-113-align-right.png" />
-                                                                     </image>
-                                                                  </ImageView>
-                                                               </graphic>
-                                                               <tooltip>
-                                                                  <Tooltip text="Right Align" />
-                                                               </tooltip>
-                                                            </Button>
                                                          </items>
                                                       </ToolBar>
                                                    </children>

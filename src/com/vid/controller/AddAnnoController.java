@@ -91,9 +91,9 @@ public class AddAnnoController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ObservableList fontList;
+		ObservableList<String> fontList;
 		fontList = FXCollections.observableList(families);
-		ObservableList fontsize_List;
+		ObservableList<Integer> fontsize_List;
 		List<Integer> fontsizelist = new ArrayList<>();
 		Collections.addAll(fontsizelist, font_array);
 		fontsize_List = FXCollections.observableList(fontsizelist);
